@@ -880,22 +880,156 @@ class MyCustomModel(models.Model):
     <h3 class="subsection-title">XML Example:</h3>
     <pre class="highlight">
     <code class="language-xml">
-<data>
-<record id="my_custom_model_form" model="ir.ui.view">
-  <field name="name">my.custom.model.form</field>
-  <field name="model">my.custom.model</field>
-  <field name="arch" type="xml">
-    <form string="My Custom Model">
-      <sheet>
-        <group>
-          <field name="name"/>
-          <field name="description"/>
-        </group>
-      </sheet>
-    </form>
-  </field>
-</record>
-</data>
+&lt;odoo&gt;
+    &lt;!-- Form View --&gt;
+    &lt;record id="view_my_custom_model_form" model="ir.ui.view"&gt;
+        &lt;field name="name"&gt;my.custom.model.form&lt;/field&gt;  
+        &lt;!-- Yeh line form view ka naam define karti hai. Yeh naam unique hona chahiye aur form view ko identify karta hai --&gt;
+        
+        &lt;field name="model"&gt;my.custom.model&lt;/field&gt;
+        &lt;!-- Yeh field model ko specify karta hai. Is form view ka model 'my.custom.model' hai, jo humne Python mein define kiya tha --&gt;
+
+        &lt;field name="arch" type="xml"&gt;
+            &lt;form string="My Custom Model Form"&gt;
+                &lt;!-- &lt;form&gt; tag form ka structure define karta hai. 'string' attribute form ka title hai --&gt;
+
+                &lt;sheet&gt;
+                    &lt;!-- &lt;sheet&gt; tag form ke content ka primary container hota hai. Ismein hum form ke fields ko organize karte hain --&gt;
+                    
+                    &lt;group&gt;
+                        &lt;!-- &lt;group&gt; tag ko use karke hum related fields ko ek group mein rakhte hain. Yeh grouping form ko organize karne mein madad karti hai --&gt;
+                        
+                        &lt;field name="name"/&gt;
+                        &lt;!-- Yeh field 'name' ko display karta hai. Is field ka type 'Char' hai, jo user ko text input karne ka option deta hai --&gt;
+                        
+                        &lt;field name="description"/&gt;
+                        &lt;!-- Yeh field 'description' ko display karta hai. Iska type 'Text' hai, jo user ko lamba description input karne ki facility deta hai --&gt;
+                    &lt;/group&gt;
+                &lt;/sheet&gt;
+            &lt;/form&gt;
+        &lt;/field&gt;
+    &lt;/record&gt;
+
+    &lt;!-- Tree (List) View --&gt;
+    &lt;record id="view_my_custom_model_tree" model="ir.ui.view"&gt;
+        &lt;field name="name"&gt;my.custom.model.tree&lt;/field&gt;
+        &lt;!-- Yeh line tree view ka naam define karti hai. Ismein data ko table format mein dikhaya jayega --&gt;
+        
+        &lt;field name="model"&gt;my.custom.model&lt;/field&gt;
+        &lt;!-- Yeh field model ko specify karta hai. Hum 'my.custom.model' ko tree view mein display karenge --&gt;
+        
+        &lt;field name="arch" type="xml"&gt;
+            &lt;tree string="My Custom Model List"&gt;
+                &lt;!-- &lt;tree&gt; tag tree view ko define karta hai. 'string' attribute view ka title hai, jo list view ke upar dikhai dega --&gt;
+                
+                &lt;field name="name"/&gt;
+                &lt;!-- Yeh field 'name' ko list ke rows mein display karta hai. Ismein text show hoga jo user ne input kiya hoga --&gt;
+                
+                &lt;field name="description"/&gt;
+                &lt;!-- Yeh field 'description' ko list ke rows mein display karta hai. Yeh bhi ek text field hai jo user ke input ko show karega --&gt;
+            &lt;/tree&gt;
+        &lt;/field&gt;
+    &lt;/record&gt;
+
+    &lt;!-- Search View --&gt;
+    &lt;record id="view_my_custom_model_search" model="ir.ui.view"&gt;
+        &lt;field name="name"&gt;my.custom.model.search&lt;/field&gt;
+        &lt;!-- Yeh line search view ka naam define karti hai. Search view ko use karke hum records ko easily search kar sakte hain --&gt;
+        
+        &lt;field name="model"&gt;my.custom.model&lt;/field&gt;
+        &lt;!-- Yeh field specify karta hai ki search kis model ke records ko karega. Yahan hum 'my.custom.model' ko search kar rahe hain --&gt;
+        
+        &lt;field name="arch" type="xml"&gt;
+            &lt;search&gt;
+                &lt;!-- &lt;search&gt; tag search bar ko define karta hai jo user ko records search karne ka option deta hai --&gt;
+                
+                &lt;field name="name"/&gt;
+                &lt;!-- Yeh field 'name' ko search filter ke roop mein show karta hai. User 'name' field ke basis pe search kar sakta hai --&gt;
+                
+                &lt;filter string="Description" name="filter_description"/&gt;
+                &lt;!-- Yeh filter 'description' field ko search karne ke liye enable karta hai. Is filter ko use karke user 'description' pe filter laga sakta hai --&gt;
+            &lt;/search&gt;
+        &lt;/field&gt;
+    &lt;/record&gt;
+
+    &lt;!-- Kanban View --&gt;
+    &lt;record id="view_my_custom_model_kanban" model="ir.ui.view"&gt;
+        &lt;field name="name"&gt;my.custom.model.kanban&lt;/field&gt;
+        &lt;!-- Yeh line kanban view ka naam define karti hai. Kanban view mein data ko cards ke form mein show kiya jayega --&gt;
+        
+        &lt;field name="model"&gt;my.custom.model&lt;/field&gt;
+        &lt;!-- Yeh field model ko specify karta hai. Hum 'my.custom.model' ko kanban cards mein display karenge --&gt;
+        
+        &lt;field name="arch" type="xml"&gt;
+            &lt;kanban string="My Custom Model Kanban"&gt;
+                &lt;!-- &lt;kanban&gt; tag kanban view ko define karta hai. 'string' attribute kanban view ka title hai --&gt;
+
+                &lt;field name="name"/&gt;
+                &lt;!-- Yeh field 'name' ko kanban card ke upar display karta hai. Yeh card ka main title hoga --&gt;
+
+                &lt;field name="description"/&gt;
+                &lt;!-- Yeh field 'description' ko kanban card ke andar show karta hai --&gt;
+                
+                &lt;templates&gt;
+                    &lt;!-- &lt;templates&gt; tag ka use hum custom templates ko define karne ke liye karte hain jo kanban card ka layout set karte hain --&gt;
+                    &lt;t t-name="kanban-box"&gt;
+                        &lt;!-- &lt;t&gt; tag ek custom template ko define karta hai. 't-name' attribute template ka name hai --&gt;
+                        
+                        &lt;div class="oe_kanban_details"&gt;
+                            &lt;!-- &lt;div&gt; tag kanban card ka content show karta hai --&gt;
+                            
+                            &lt;field name="name"/&gt;
+                            &lt;!-- Yeh field 'name' ko kanban card ke upar dikhata hai --&gt;
+                            
+                            &lt;field name="description"/&gt;
+                            &lt;!-- Yeh field 'description' ko kanban card ke andar dikhata hai --&gt;
+                        &lt;/div&gt;
+                    &lt;/t&gt;
+                &lt;/templates&gt;
+            &lt;/kanban&gt;
+        &lt;/field&gt;
+    &lt;/record&gt;
+
+    &lt;!-- Graph View --&gt;
+    &lt;record id="view_my_custom_model_graph" model="ir.ui.view"&gt;
+        &lt;field name="name"&gt;my.custom.model.graph&lt;/field&gt;
+        &lt;!-- Yeh line graph view ka naam define karti hai. Graph view mein data ko visually represent kiya jayega --&gt;
+        
+        &lt;field name="model"&gt;my.custom.model&lt;/field&gt;
+        &lt;!-- Yeh field model ko specify karta hai. Graph view ke liye hum 'my.custom.model' ka data show karenge --&gt;
+        
+        &lt;field name="arch" type="xml"&gt;
+            &lt;graph string="My Custom Model Graph" type="bar"&gt;
+                &lt;!-- &lt;graph&gt; tag graph view ko define karta hai. 'type="bar"' se yeh bataya gaya hai ki yeh bar chart hoga --&gt;
+
+                &lt;field name="name"/&gt;
+                &lt;!-- Yeh field 'name' ko x-axis par show karega --&gt;
+
+                &lt;field name="description"/&gt;
+                &lt;!-- Yeh field 'description' ko y-axis par show karega --&gt;
+            &lt;/graph&gt;
+        &lt;/field&gt;
+    &lt;/record&gt;
+
+    &lt;!-- QWeb Report --&gt;
+    &lt;record id="report_my_custom_model_qweb" model="ir.actions.report"&gt;
+        &lt;field name="name"&gt;My Custom Model Report&lt;/field&gt;
+        &lt;!-- Yeh line report ka naam define karti hai. Yeh naam report ke liye system mein use hota hai --&gt;
+        
+        &lt;field name="model"&gt;my.custom.model&lt;/field&gt;
+        &lt;!-- Yeh field specify karta hai ki report kis model ke liye generate ki jayegi. Is case mein yeh 'my.custom.model' hai --&gt;
+        
+        &lt;field name="report_type"&gt;qweb-pdf&lt;/field&gt;
+        &lt;!-- Yeh field report ka type specify karta hai. 'qweb-pdf' se yeh bataya gaya hai ki report QWeb template se PDF format mein generate hogi --&gt;
+        
+        &lt;field name="report_name"&gt;my_custom_model.report_qweb&lt;/field&gt;
+        &lt;!-- Yeh field report template ka naam specify karta hai. Yeh template report ka layout define karega --&gt;
+
+        &lt;field name="print_report_name"&gt;'My Custom Model - ' + object.name&lt;/field&gt;
+        &lt;!-- Yeh field generated PDF file ka naam define karta hai. 'object.name' se 'name' field ki value include ki jayegi --&gt;
+    &lt;/record&gt;
+&lt;/odoo&gt;
+
     </code>
   </pre>
 
