@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -839,7 +838,7 @@ static/
 
     <h3 class="subsection-title">Basic Python Concepts for Odoo Development:</h3>
     <ul>
-      <li><strong>Classes:</strong> Odoo me har ek model ek Python class hoti hai jo <code>models.Model</code> se
+      <li><strong>Classes:</strong> Odoo me har ek model ek Python class hoti hai jo <code class="language-markup">models.Model</code> se
         inherit karti hai.</li>
       <li><strong>Methods:</strong> Odoo me models me methods likhkar aap business logic ko define kar sakte hain.</li>
       <li><strong>Inheritance:</strong> Aap models ko inherit karke unki properties aur methods ko extend kar sakte
@@ -868,14 +867,14 @@ class MyCustomModel(models.Model):
     <h3 class="subsection-title">Important Model Attributes:</h3>
     <ul>
       <li><strong>_name (Model Name):</strong> Ye attribute model ka name define karta hai, jo database table ka naam
-        bhi hota hai.<br>Example: <code>_name = 'my.custom.model'</code></li>
+        bhi hota hai.<br>Example: <code class="language-markup">_name = 'my.custom.model'</code></li>
       <li><strong>_description (Model Description):</strong> Ye attribute model ki description ko define karta
-        hai.<br>Example: <code>_description = 'My Custom Model for managing data'</code></li>
+        hai.<br>Example: <code class="language-markup">_description = 'My Custom Model for managing data'</code></li>
       <li><strong>_inherit (Model Inheritance):</strong> Agar aapko existing Odoo model ko extend karna ho, toh aap
-        <code>_inherit</code> attribute ka use karte hain.<br>Example: <code>_inherit = 'res.partner'</code>
+        <code class="language-markup">_inherit</code> attribute ka use karte hain.<br>Example: <code class="language-markup">_inherit = 'res.partner'</code>
       </li>
       <li><strong>_rec_name (Record Name):</strong> Ye attribute specify karta hai ki record ka naam kaunsa field
-        display karega.<br>Example: <code>_rec_name = 'name'</code></li>
+        display karega.<br>Example: <code class="language-markup">_rec_name = 'name'</code></li>
     </ul>
 
     <h3 class="subsection-title">XML Example:</h3>
@@ -941,8 +940,8 @@ partner = self.env['res.partner'].create({
 })
     </code>
   </pre>
-    <p>Is example me, hum <code>res.partner</code> model me naya partner record create kar rahe hain.
-      <code>create()</code> method me ek dictionary pass hota hai jisme fields aur unke values define hote hain.
+    <p>Is example me, hum <code class="language-markup">res.partner</code> model me naya partner record create kar rahe hain.
+      <code class="language-markup">create()</code> method me ek dictionary pass hota hai jisme fields aur unke values define hote hain.
     </p>
 
     <h3 class="subsection-title">write() Method:</h3>
@@ -969,7 +968,7 @@ partner.write({
 partner.unlink()
     </code>
   </pre>
-    <p>Yahaan, hum partner record ko delete kar rahe hain. <code>unlink()</code> method se record ko permanently delete
+    <p>Yahaan, hum partner record ko delete kar rahe hain. <code class="language-markup">unlink()</code> method se record ko permanently delete
       kiya jaata hai.</p>
 
     <h3 class="subsection-title">search() Method:</h3>
@@ -983,7 +982,7 @@ partner.unlink()
 partner = self.env['res.partner'].search([('name', '=', 'John Doe')])
     </code>
   </pre>
-    <p>Is example me, hum <code>res.partner</code> model se "John Doe" naam ke partners ko search kar rahe hain.</p>
+    <p>Is example me, hum <code class="language-markup">res.partner</code> model se "John Doe" naam ke partners ko search kar rahe hain.</p>
 
     <h3 class="subsection-title">browse() Method:</h3>
     <p><strong>Purpose:</strong> Specific records ko retrieve karne ke liye.<br>
@@ -1015,7 +1014,7 @@ class SaleOrder(models.Model):
       self.price_total = self.price_unit * 10
     </code>
   </pre>
-    <p>Is example me, jab <code>price_unit</code> field ko change kiya jaayega, tab <code>price_total</code>
+    <p>Is example me, jab <code class="language-markup">price_unit</code> field ko change kiya jaayega, tab <code class="language-markup">price_total</code>
       automatically calculate ho jayega.</p>
 
     <h3 class="subsection-title">default() Method:</h3>
@@ -1049,7 +1048,7 @@ class SaleOrder(models.Model):
           record.total_price = record.price_unit * record.quantity
     </code>
   </pre>
-    <p>Is example me, <code>total_price</code> field <code>price_unit</code> aur <code>quantity</code> ke basis par
+    <p>Is example me, <code class="language-markup">total_price</code> field <code class="language-markup">price_unit</code> aur <code class="language-markup">quantity</code> ke basis par
       calculate hota hai.</p>
   </div>
 
@@ -1080,7 +1079,7 @@ class SaleOrder(models.Model):
     <p>Example:</p>
     <p>Aap ek group "Sales Manager" bana sakte hain, jo Sales Order model par Create, Read, Write, aur Delete rights
       rakhta ho. Yeh aap ir.model.access.csv file ke through define kar sakte hain.</p>
-    <pre><code>
+    <pre><code class="language-markup">
 access_sales_manager,access.sales.manager,model_sale_order,base.group_sale_manager,1,1,1,1
   </code></pre>
     <p>Is example me, Sales Manager group ko Sales Order model par Create, Read, Write, aur Delete rights mil rahe hain.
@@ -1102,7 +1101,7 @@ access_sales_manager,access.sales.manager,model_sale_order,base.group_sale_manag
     <p>Example:</p>
     <p>Maan lijiye aapko ek rule banana hai jisme Sales Manager ko sirf unhi sales orders ko dekhne ki permission mile
       jo unke department ke liye hain.</p>
-    <pre><code>
+    <pre><code class="language-markup">
 Rule ka naam: "Sales Order for My Department"
 Domain: ['&', ('department_id', '=', user.department_id), ('state', '=', 'draft')]
 Apply for: Read Access
@@ -1125,7 +1124,7 @@ Apply for: Read Access
     <p>Example of a Group:</p>
     <p>Maan lijiye aap ek custom group create karna chahte hain, jo Inventory Manager ke liye ho. Is group ko aap
       Inventory model par Read, Write aur Create permissions de sakte hain.</p>
-    <pre><code>
+    <pre><code class="language-markup">
 &lt;record id="group_inventory_manager" model="res.groups"&gt;
   &lt;field name="name"&gt;Inventory Manager&lt;/field&gt;
   &lt;field name="category_id" ref="base.module_category_inventory"/&gt;
@@ -1144,7 +1143,7 @@ Apply for: Read Access
     <p>Example of User Creation:</p>
     <p>Aap ek user John Doe ko create kar rahe hain aur usko Sales Manager aur Inventory User groups assign kar rahe
       hain.</p>
-    <pre><code>
+    <pre><code class="language-markup">
 &lt;record id="user_sales_manager" model="res.users"&gt;
   &lt;field name="name"&gt;John Doe&lt;/field&gt;
   &lt;field name="login"&gt;johndoe&lt;/field&gt;
@@ -1201,7 +1200,7 @@ Apply for: Read Access
     <h3 class="subsection-title">Basic Module Structure</h3>
     <p>Ek module ke liye basic folder structure kuch is tarah dikhega:</p>
 
-    <pre class="highlight"><code>bash
+    <pre class="highlight"><code class="language-markup">bash
 my_custom_module/
 ├── __init__.py              # Python package initialization
 ├── __manifest__.py          # Module configuration
@@ -1229,7 +1228,7 @@ my_custom_module/
       files ko load karna hai.</p>
 
     <h3 class="subsection-title">Example: Manifest File (__manifest__.py)</h3>
-    <pre class="highlight"><code>python
+    <pre class="highlight"><code class="language-markup">python
 {
   'name': 'My Custom Module',  # Module ka naam
   'version': '1.0',            # Module ki version
@@ -1265,7 +1264,7 @@ my_custom_module/
     <p><strong>Form View:</strong> Form view ka use data ko edit karne ke liye hota hai.</p>
 
     <h4>Example: Form View</h4>
-    <pre class="highlight"><code>xml
+    <pre class="highlight"><code class="language-markup">xml
 &lt;odoo&gt;
   &lt;!-- Form View for My Model --&gt;
   &lt;record id="view_form_my_model" model="ir.ui.view"&gt;
@@ -1288,7 +1287,7 @@ my_custom_module/
     <p><strong>Tree (List) View:</strong> Yeh view records ko ek list mein show karta hai.</p>
 
     <h4>Example: Tree (List) View</h4>
-    <pre class="highlight"><code>xml
+    <pre class="highlight"><code class="language-markup">xml
 &lt;odoo&gt;
   &lt;!-- Tree View for My Model --&gt;
   &lt;record id="view_tree_my_model" model="ir.ui.view"&gt;
@@ -1308,7 +1307,7 @@ my_custom_module/
       task management ke liye.</p>
 
     <h4>Example: Kanban View</h4>
-    <pre class="highlight"><code>xml
+    <pre class="highlight"><code class="language-markup">xml
 &lt;odoo&gt;
   &lt;!-- Kanban View for My Model --&gt;
   &lt;record id="view_kanban_my_model" model="ir.ui.view"&gt;
@@ -1335,7 +1334,7 @@ my_custom_module/
       user ko specific data ko quickly find karne mein madad karte hain.</p>
 
     <h4>Example: Search View</h4>
-    <pre class="highlight"><code>xml
+    <pre class="highlight"><code class="language-markup">xml
 &lt;odoo&gt;
   &lt;record id="view_search_my_model" model="ir.ui.view"&gt;
       &lt;field name="name"&gt;my.model.search&lt;/field&gt;
@@ -1671,7 +1670,7 @@ class SaleOrder(models.Model):
     <h3 class="subsection-title">Database Creation and Backup</h3>
     <p>
       Odoo installation ke baad ek database create hota hai. Agar aapko apne Odoo instance mein naya database create
-      karna ho, toh PostgreSQL ka <code>CREATE DATABASE</code> command use karke aap naya database bana sakte hain.
+      karna ho, toh PostgreSQL ka <code class="language-markup">CREATE DATABASE</code> command use karke aap naya database bana sakte hain.
     </p>
 
     <div class="highlight">
@@ -1687,14 +1686,14 @@ class SaleOrder(models.Model):
   GRANT ALL PRIVILEGES ON DATABASE odoo_db TO odoo_user;
       </code></pre>
       <p>
-        Ismein <code>odoo_db</code> aapka database hai aur <code>odoo_user</code> woh user hai jisko aapne permissions
+        Ismein <code class="language-markup">odoo_db</code> aapka database hai aur <code class="language-markup">odoo_user</code> woh user hai jisko aapne permissions
         diye hain.
       </p>
     </div>
 
     <h3 class="subsection-title">Database Backup</h3>
     <p>
-      Aap PostgreSQL ke <code>pg_dump</code> tool ka use karke apne Odoo database ka backup le sakte hain.
+      Aap PostgreSQL ke <code class="language-markup">pg_dump</code> tool ka use karke apne Odoo database ka backup le sakte hain.
     </p>
 
     <div class="highlight">
@@ -1704,12 +1703,12 @@ class SaleOrder(models.Model):
   pg_dump -U odoo_user odoo_db &gt; odoo_db_backup.sql
       </code></pre>
       <p>
-        Is command se <code>odoo_db</code> ka backup <code>odoo_db_backup.sql</code> file mein save ho jayega.
+        Is command se <code class="language-markup">odoo_db</code> ka backup <code class="language-markup">odoo_db_backup.sql</code> file mein save ho jayega.
       </p>
     </div>
 
     <p>
-      Agar aapko backup restore karna ho, toh aap <code>psql</code> command ka use kar sakte hain:
+      Agar aapko backup restore karna ho, toh aap <code class="language-markup">psql</code> command ka use kar sakte hain:
     </p>
 
     <div class="highlight">
@@ -1726,8 +1725,8 @@ class SaleOrder(models.Model):
 
     <h3 class="subsection-title">Queries</h3>
     <p>
-      Odoo mein aap ORM methods ka use karke queries execute karte hain, jaise <code>search()</code>,
-      <code>write()</code>, aur <code>create()</code>. Lekin agar aapko complex queries likhni ho, toh direct SQL
+      Odoo mein aap ORM methods ka use karke queries execute karte hain, jaise <code class="language-markup">search()</code>,
+      <code class="language-markup">write()</code>, aur <code class="language-markup">create()</code>. Lekin agar aapko complex queries likhni ho, toh direct SQL
       queries bhi likh sakte hain.
     </p>
 
@@ -1737,7 +1736,7 @@ class SaleOrder(models.Model):
   SELECT name, age FROM my_model WHERE age &gt; 30;
       </code></pre>
       <p>
-        Is query se aap <code>my_model</code> table se un records ko fetch karenge jinka age 30 se zyada hai.
+        Is query se aap <code class="language-markup">my_model</code> table se un records ko fetch karenge jinka age 30 se zyada hai.
       </p>
     </div>
 
@@ -1753,7 +1752,7 @@ class SaleOrder(models.Model):
   CREATE INDEX index_name ON my_model (age);
       </code></pre>
       <p>
-        Is index se <code>age</code> column par queries ka execution fast ho jayega.
+        Is index se <code class="language-markup">age</code> column par queries ka execution fast ho jayega.
       </p>
     </div>
 
@@ -1766,7 +1765,7 @@ class SaleOrder(models.Model):
     <h3 class="subsection-title">SQL Queries in Odoo (Direct SQL Queries)</h3>
     <p>
       Odoo mein, by default aap ORM methods ka use karte hain, lekin jab aapko complex operations perform karne ho, toh
-      direct SQL queries ka use kar sakte hain. Aap SQL queries ko execute karne ke liye <code>env.cr.execute()</code>
+      direct SQL queries ka use kar sakte hain. Aap SQL queries ko execute karne ke liye <code class="language-markup">env.cr.execute()</code>
       method ka use karte hain.
     </p>
 
@@ -1786,7 +1785,7 @@ class SaleOrder(models.Model):
           return result
       </code></pre>
       <p>
-        Is example mein, <code>env.cr.execute()</code> method SQL query ko execute karta hai aur <code>fetchall()</code>
+        Is example mein, <code class="language-markup">env.cr.execute()</code> method SQL query ko execute karta hai aur <code class="language-markup">fetchall()</code>
         method query ke result ko fetch karne ka kaam karta hai.
       </p>
     </div>
@@ -1854,7 +1853,7 @@ class SaleOrder(models.Model):
   records = self.env['my.model'].search([], fields=['name', 'age'])
       </code></pre>
       <p>
-        Jab aap sirf kuch specific fields ki zaroorat ho, toh aap <code>fields</code> parameter ka use karke query ko
+        Jab aap sirf kuch specific fields ki zaroorat ho, toh aap <code class="language-markup">fields</code> parameter ka use karke query ko
         optimize kar sakte hain. Isse unnecessary data load nahi hota, jo performance ko improve karta hai.
       </p>
     </div>
@@ -1900,7 +1899,7 @@ class MyModel(models.Model):
             })
     </code></pre>
       <p>
-        Is example mein, automated action jab record create hota hai, toh <code>_run_automated_action()</code> method
+        Is example mein, automated action jab record create hota hai, toh <code class="language-markup">_run_automated_action()</code> method
         call hota hai aur agar 'John' naam ka record nahi hota, toh naya record create hota hai.
       </p>
     </div>
@@ -1965,7 +1964,7 @@ class MyCronJob(models.Model):
 </template>
     </code></pre>
       <p>
-        Yeh ek basic QWeb report hai jo <code>my.model</code> records ka naam aur age show karta hai.
+        Yeh ek basic QWeb report hai jo <code class="language-markup">my.model</code> records ka naam aur age show karta hai.
       </p>
     </div>
 
@@ -2223,10 +2222,10 @@ class CustomWebsiteController(http.Controller):
       &lt;/odoo&gt;</code></pre>
     <p><strong>Explanation:</strong></p>
     <ul>
-      <li><code>account.journal</code>: Yeh model Odoo mein journals ko represent karta hai.</li>
-      <li><code>name</code>: Journal ka naam.</li>
-      <li><code>code</code>: Journal ka unique code.</li>
-      <li><code>type</code>: Journal ka type, yeh "sale", "purchase", ya "cash" ho sakta hai.</li>
+      <li><code class="language-markup">account.journal</code>: Yeh model Odoo mein journals ko represent karta hai.</li>
+      <li><code class="language-markup">name</code>: Journal ka naam.</li>
+      <li><code class="language-markup">code</code>: Journal ka unique code.</li>
+      <li><code class="language-markup">type</code>: Journal ka type, yeh "sale", "purchase", ya "cash" ho sakta hai.</li>
     </ul>
 
     <div class="section-title">Taxes:</div>
@@ -2244,9 +2243,9 @@ class CustomWebsiteController(http.Controller):
       &lt;/odoo&gt;</code></pre>
     <p><strong>Explanation:</strong></p>
     <ul>
-      <li><code>account.tax</code>: Yeh model Odoo mein taxes ko represent karta hai.</li>
-      <li><code>amount_type</code>: Yeh percentage tax rate ko define karta hai.</li>
-      <li><code>amount</code>: Yeh actual tax rate ko define karta hai.</li>
+      <li><code class="language-markup">account.tax</code>: Yeh model Odoo mein taxes ko represent karta hai.</li>
+      <li><code class="language-markup">amount_type</code>: Yeh percentage tax rate ko define karta hai.</li>
+      <li><code class="language-markup">amount</code>: Yeh actual tax rate ko define karta hai.</li>
     </ul>
 
     <div class="section-title">Financial Reports:</div>
@@ -2297,10 +2296,10 @@ class CustomWebsiteController(http.Controller):
       &lt;/odoo&gt;</code></pre>
     <p><strong>Explanation:</strong></p>
     <ul>
-      <li><code>res.currency</code>: Yeh model currencies ko represent karta hai.</li>
-      <li><code>name</code>: Currency ka name (jaise USD).</li>
-      <li><code>symbol</code>: Currency ka symbol.</li>
-      <li><code>rate</code>: Currency ka exchange rate.</li>
+      <li><code class="language-markup">res.currency</code>: Yeh model currencies ko represent karta hai.</li>
+      <li><code class="language-markup">name</code>: Currency ka name (jaise USD).</li>
+      <li><code class="language-markup">symbol</code>: Currency ka symbol.</li>
+      <li><code class="language-markup">rate</code>: Currency ka exchange rate.</li>
     </ul>
 
     <div class="subsection-title">Managing Exchange Rates:</div>
@@ -2318,8 +2317,8 @@ class CustomWebsiteController(http.Controller):
               usd_currency.write({'rate': 75.5})  # Update exchange rate for USD</code></pre>
     <p><strong>Explanation:</strong></p>
     <ul>
-      <li><code>search()</code>: Yeh method specific record ko search karta hai.</li>
-      <li><code>write()</code>: Yeh method record ko update karta hai.</li>
+      <li><code class="language-markup">search()</code>: Yeh method specific record ko search karta hai.</li>
+      <li><code class="language-markup">write()</code>: Yeh method record ko update karta hai.</li>
     </ul>
 
     <div class="section-title">3. Localization and Translations in Odoo</div>
@@ -2352,9 +2351,9 @@ class CustomWebsiteController(http.Controller):
       &lt;/odoo&gt;</code></pre>
     <p><strong>Explanation:</strong></p>
     <ul>
-      <li><code>ir.translation</code>: Yeh model translation records ko represent karta hai.</li>
-      <li><code>lang</code>: Yeh field selected language ko represent karta hai (jaise 'en' for English).</li>
-      <li><code>value</code>: Yeh field translated string ko represent karta hai.</li>
+      <li><code class="language-markup">ir.translation</code>: Yeh model translation records ko represent karta hai.</li>
+      <li><code class="language-markup">lang</code>: Yeh field selected language ko represent karta hai (jaise 'en' for English).</li>
+      <li><code class="language-markup">value</code>: Yeh field translated string ko represent karta hai.</li>
     </ul>
 
     <div class="section-title">4. Sales and Purchase Management</div>
@@ -2378,9 +2377,9 @@ class CustomWebsiteController(http.Controller):
       &lt;/odoo&gt;</code></pre>
     <p><strong>Explanation:</strong></p>
     <ul>
-      <li><code>sale.order</code>: Yeh model sales orders ko represent karta hai.</li>
-      <li><code>order_line</code>: Yeh field sales order mein products ko define karta hai.</li>
-      <li><code>product_id</code>: Yeh field product ko represent karta hai jo sale ho raha hai.</li>
+      <li><code class="language-markup">sale.order</code>: Yeh model sales orders ko represent karta hai.</li>
+      <li><code class="language-markup">order_line</code>: Yeh field sales order mein products ko define karta hai.</li>
+      <li><code class="language-markup">product_id</code>: Yeh field product ko represent karta hai jo sale ho raha hai.</li>
     </ul>
 
     <div class="subsection-title">Purchase Orders Management:</div>
@@ -2401,9 +2400,9 @@ class CustomWebsiteController(http.Controller):
       &lt;/odoo&gt;</code></pre>
     <p><strong>Explanation:</strong></p>
     <ul>
-      <li><code>purchase.order</code>: Yeh model purchase orders ko represent karta hai.</li>
-      <li><code>order_line</code>: Yeh field purchase order mein products ko define karta hai.</li>
-      <li><code>product_id</code>: Yeh field product ko represent karta hai jo purchase ho raha hai.</li>
+      <li><code class="language-markup">purchase.order</code>: Yeh model purchase orders ko represent karta hai.</li>
+      <li><code class="language-markup">order_line</code>: Yeh field purchase order mein products ko define karta hai.</li>
+      <li><code class="language-markup">product_id</code>: Yeh field product ko represent karta hai jo purchase ho raha hai.</li>
     </ul>
 
     <div class="section-title">5. Inventory Management</div>
@@ -2424,9 +2423,9 @@ class CustomWebsiteController(http.Controller):
       &lt;/odoo&gt;</code></pre>
     <p><strong>Explanation:</strong></p>
     <ul>
-      <li><code>stock.move</code>: Yeh model stock movements ko represent karta hai.</li>
-      <li><code>location_id</code>: Yeh field source location ko represent karta hai.</li>
-      <li><code>location_dest_id</code>: Yeh field destination location ko represent karta hai.</li>
+      <li><code class="language-markup">stock.move</code>: Yeh model stock movements ko represent karta hai.</li>
+      <li><code class="language-markup">location_id</code>: Yeh field source location ko represent karta hai.</li>
+      <li><code class="language-markup">location_dest_id</code>: Yeh field destination location ko represent karta hai.</li>
     </ul>
   </div>
 
@@ -2483,8 +2482,8 @@ class CustomWebsiteController(http.Controller):
       </code></pre>
     <p>
       <strong>Explanation:</strong><br>
-      <code>log_file</code>: Yeh Odoo ke log ko ek specific file mein store karta hai.<br>
-      <code>log_level</code>: Aapko debugging ke liye debug set karna chahiye, jisse aapko sab details milengi,
+      <code class="language-markup">log_file</code>: Yeh Odoo ke log ko ek specific file mein store karta hai.<br>
+      <code class="language-markup">log_level</code>: Aapko debugging ke liye debug set karna chahiye, jisse aapko sab details milengi,
       including queries aur errors.
     </p>
 
@@ -2511,9 +2510,9 @@ class CustomWebsiteController(http.Controller):
       </code></pre>
     <p>
       <strong>Explanation:</strong><br>
-      <code>upstream</code>: Yahan aap multiple Odoo servers define karte hain, aur Nginx requests ko un servers pe
+      <code class="language-markup">upstream</code>: Yahan aap multiple Odoo servers define karte hain, aur Nginx requests ko un servers pe
       distribute karta hai.<br>
-      <code>proxy_pass</code>: Yeh directive Nginx ko batata hai ki request ko load-balanced servers pe forward kare.
+      <code class="language-markup">proxy_pass</code>: Yeh directive Nginx ko batata hai ki request ko load-balanced servers pe forward kare.
     </p>
 
     <div class="subsection-title">Caching:</div>
@@ -2550,7 +2549,7 @@ class CustomWebsiteController(http.Controller):
       </code></pre>
     <p>
       <strong>Explanation:</strong><br>
-      <code>CREATE INDEX</code>: Yeh command PostgreSQL mein index create karti hai. Index search operations ko fast
+      <code class="language-markup">CREATE INDEX</code>: Yeh command PostgreSQL mein index create karti hai. Index search operations ko fast
       banaata hai.
     </p>
 
@@ -2587,7 +2586,7 @@ class CustomWebsiteController(http.Controller):
       </code></pre>
     <p>
       <strong>Explanation:</strong><br>
-      <code>cProfile</code>: Yeh Python ka ek module hai jo code ki execution time ko track karta hai.
+      <code class="language-markup">cProfile</code>: Yeh Python ka ek module hai jo code ki execution time ko track karta hai.
     </p>
 
     <div class="subsection-title">Optimizing Code:</div>
@@ -2604,8 +2603,8 @@ class CustomWebsiteController(http.Controller):
       </code></pre>
     <p>
       <strong>Explanation:</strong><br>
-      <code>sudo()</code>: Superuser privileges deta hai jo sensitive data ko access karne mein madad karta hai.<br>
-      <code>limit</code>: Query result ko limit karne se performance improve hota hai, kyunki aapko unnecessary records
+      <code class="language-markup">sudo()</code>: Superuser privileges deta hai jo sensitive data ko access karne mein madad karta hai.<br>
+      <code class="language-markup">limit</code>: Query result ko limit karne se performance improve hota hai, kyunki aapko unnecessary records
       ko fetch nahi karna padta.
     </p>
 
@@ -2850,7 +2849,7 @@ class CustomWebsiteController(http.Controller):
       custom modules ke liye set kar sakte hain.
     </p>
     <p>
-      <strong>Versioning Format:</strong> Odoo module versioning scheme usually <code>major.minor.patch</code> format
+      <strong>Versioning Format:</strong> Odoo module versioning scheme usually <code class="language-markup">major.minor.patch</code> format
       mein hota hai.
     </p>
     <ul>
@@ -2860,7 +2859,7 @@ class CustomWebsiteController(http.Controller):
       <li><strong>Patch version:</strong> Bug fixes, small improvements, and no changes to API or features.</li>
     </ul>
 
-    <p><strong>Example - Module Versioning in <code>__manifest__.py</code>:</strong></p>
+    <p><strong>Example - Module Versioning in <code class="language-markup">__manifest__.py</code>:</strong></p>
     <pre><code class="language-python">
     {
         'name': 'My Custom Module',
@@ -2900,7 +2899,7 @@ class CustomWebsiteController(http.Controller):
 
     <p><strong>Example - Migration from Odoo v14 to v16:</strong></p>
     <p>
-      Agar aapne apne module mein kuch fields add kiye hain, jaise ek custom field <code>x_custom_field</code> v14 mein
+      Agar aapne apne module mein kuch fields add kiye hain, jaise ek custom field <code class="language-markup">x_custom_field</code> v14 mein
       tha, aur ab v16 mein bhi usko update karna hai, toh aapko migration script likhna padega.
     </p>
 
@@ -2928,7 +2927,7 @@ class CustomWebsiteController(http.Controller):
       <ul>
         <li><strong>migrate_v14_to_v16:</strong> Method is written in the custom migration script.</li>
         <li>In this script, the old records are updated to the new structure or format. Here, we updated the custom
-          field <code>x_custom_field</code>.</li>
+          field <code class="language-markup">x_custom_field</code>.</li>
       </ul>
     </div>
 
@@ -2946,12 +2945,12 @@ class CustomWebsiteController(http.Controller):
       <li><strong>Check for Schema Changes:</strong> Odoo ke naye version mein schema changes ho sakte hain, jaise naye
         fields, tables, ya relations. Inko identify karne ke liye aapko Odoo ke release notes ya changelogs ko padhna
         hoga.</li>
-      <li><strong>Update <code>__manifest__.py</code> for New Version:</strong> Module ke <code>__manifest__.py</code>
+      <li><strong>Update <code class="language-markup">__manifest__.py</code> for New Version:</strong> Module ke <code class="language-markup">__manifest__.py</code>
         file ko naye version ke liye update karna hoga. Jaise field definitions, dependencies, aur XML files ko naye
         version ke hisaab se modify karna padta hai.</li>
-      <li><strong>Run Migration Commands:</strong> Odoo ke <code>-u</code> option ka use karke modules ko update kar
+      <li><strong>Run Migration Commands:</strong> Odoo ke <code class="language-markup">-u</code> option ka use karke modules ko update kar
         sakte hain, jisse naye changes apply ho jate hain. Command:
-        <code>./odoo-bin -c /etc/odoo.conf -d odoo_db -u all</code>
+        <code class="language-markup">./odoo-bin -c /etc/odoo.conf -d odoo_db -u all</code>
       </li>
       <li><strong>Manual Migration Adjustments:</strong> Kabhi-kabhi, automatic migration tools sab kuch handle nahi
         karte, isliye aapko manually bhi data ko adjust karna padta hai, jaise field types ko change karna, purani
@@ -3048,7 +3047,7 @@ class CustomWebsiteController(http.Controller):
   <div class="content">
     <h1>Complete Odoo Example</h1>
     <p>The folder structure for your custom Odoo module is as follows:</p>
-    <pre><code>bash
+    <pre><code class="language-markup">bash
     my_custom_module/
     │
     ├── controllers/
@@ -3329,7 +3328,7 @@ class CustomWebsiteController(http.Controller):
 
     <p><strong>12. module directory structure recap:</strong></p>
     <div class="highlight">
-      <pre><code>bash
+      <pre><code class="language-markup">bash
       my_custom_module/
       ├── __init__.py
       ├── __manifest__.py
