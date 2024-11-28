@@ -1,1 +1,3379 @@
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odoo Architecture Overview</title>
+
+  <!-- Include Prism.js CSS for syntax highlighting -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 10px;
+      background-color: #fafafa;
+      color: #333;
+    }
+
+    h1,
+    h2 {
+      color: #3f51b5;
+    }
+
+    .content {
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .highlight {
+      background-color: #e8f4ff;
+      padding: 10px;
+      border-radius: 3px;
+      border: 1px solid #bbb;
+    }
+
+    .section-title {
+      color: #4caf50;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .subsection-title {
+      color: #ff9800;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .important {
+      font-weight: bold;
+      color: #ff5722;
+    }
+
+    ul {
+      color: #607d8b;
+    }
+
+    /* Styling for other elements */
+    code {
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #f5f5f5;
+      padding: 4px;
+      border-radius: 4px;
+      color: #d6336c;
+    }
+
+    pre {
+      background-color: #2d2d2d;
+      padding: 15px;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-size: 16px;
+      color: #dcdcdc;
+      border: 1px solid #444;
+    }
+  </style>
+
+  <!-- Include Prism.js for syntax highlighting -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-xml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+</head>
+
+
+
+
+
+
+<body>
+
+ 
+
+
+  <div
+  style="font-family: 'Arial', sans-serif; margin: 0; padding: 20px; background: linear-gradient(135deg, #00bcd4, #2196f3); color: #333;">
+  <div
+    style="max-width: 800px; margin: 0 auto; background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); text-align: center;">
+
+    <!-- Title with Gradient Animation -->
+    <h1
+      style="background: linear-gradient(45deg, #808447, #03a9f4, #5c6bc0, #0097a7); -webkit-background-clip: text; color: transparent; font-size: 3rem; animation: gradient-animation 3s ease infinite; margin-bottom: 30px;">
+      Complete Odoo Course
+    </h1>
+
+    <!-- Author -->
+    <p style="font-size: 1.1rem; margin-bottom: 15px;">
+      <strong style="color: #0288d1;">Author:</strong> <span
+        style="background: linear-gradient(45deg, #643871, #1565c0, #64b5f6); -webkit-background-clip: text; color: transparent; font-weight: 900; animation: gradient-animation 3s ease infinite;">
+        Praveen Nigam</span>
+    </p>
+
+    <!-- Subject -->
+    <p style="font-size: 1.1rem; margin-bottom: 15px;">
+      <strong style="color: #0288d1;">Subject:</strong>
+      <span
+        style="background: linear-gradient(45deg, #76405d, #1976d2, #0097a7); -webkit-background-clip: text; color: transparent; font-weight: 900; animation: gradient-animation 3s ease infinite;">
+        Odoo</span>
+    </p>
+
+    <!-- Links -->
+    <div style="margin-bottom: 30px;">
+      <p style="font-size: 1.1rem;">
+        <strong>Link 1:</strong>
+        <a href="https://impraveen.onrender.com"
+          style="background: linear-gradient(45deg, #baf0a3, #03a9f4, #81d4fa, #00bcd4); -webkit-background-clip: text; color: transparent; font-weight: 900; animation: gradient-animation 3s ease infinite;"
+          onmouseover="this.style.color='#00acc1';" onmouseout="this.style.color='#0097a7';">
+          impraveen.onrender.com
+        </a>
+      </p>
+
+      <p style="font-size: 1.1rem;">
+        <strong>Link 2:</strong>
+        <a href="https://youtube.com/@thewebseller?si=2Z9pOIQRTYNrFiP5"
+          style="color: #1976d2; text-decoration: none; font-weight: bold; transition: color 0.3s ease;"
+          onmouseover="this.style.color='#0288d1';" onmouseout="this.style.color='#1976d2';">
+          YouTube
+        </a>
+      </p>
+    </div>
+
+  </div>
+
+  <style>
+    /* Animated gradient effect for the title */
+    @keyframes gradient-animation {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Animated background gradient for the heading */
+    h1 {
+      background-size: 400% 400%;
+      animation: gradient-animation 3s ease infinite;
+    }
+
+    /* Subtle hover effect for links */
+    a:hover {
+      text-decoration: underline;
+      color: #0288d1;
+    }
+  </style>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="content">
+    <h1>Odoo Complete Syllabus</h1>
+    <pre><code class="language-markup">
+  1. Introduction to Odoo
+  Overview of Odoo and its ecosystem.
+  Editions: Community vs. Enterprise.
+  Architecture and framework overview (MVC pattern).
+  Installation:
+    - Odoo setup on Windows/Linux/Mac.
+    - Database configuration (PostgreSQL).
+    - Workspace setup (e.g., Visual Studio Code, PyCharm).
+  
+
+  2. Odoo Functional Overview
+  General Navigation:
+    - Menus, modules, and user interface.
+    - Basic operations: Create, Read, Update, Delete (CRUD).
+  Core Applications:
+    - CRM (Customer Relationship Management).
+    - Sales and Purchase Management.
+    - Inventory and Warehouse Management.
+    - Accounting and Invoicing.
+    - Human Resources (Employees, Leaves, Payroll).
+    - Project and Timesheet Management.
+    - Manufacturing and Maintenance.
+    - eCommerce and Website Builder.
+    - Customizing views using Odoo Studio.
+  
+
+  3. Technical Overview
+  Odoo Framework:
+    - Core components: ORM, Views, Controllers, QWeb.
+    - Addons structure and module development.
+  Server-Side Development:
+    - Python basics for Odoo.
+  Models:
+    - _name, _description, _inherit, _rec_name.
+    - Fields: Basic types (Char, Integer, Float), Relational fields (Many2one, One2many, Many2many), Computed fields.
+    - Constraints: SQL and Python constraints.
+  ORM methods:
+    - create(), write(), unlink(), search(), browse().
+    - Onchange and default methods.
+    - Decorators: @api.model, @api.multi, @api.depends.
+  Security:
+    - Access rights and record rules.
+    - Groups and users.
+  Frontend Development:
+    - XML templates.
+    - QWeb for custom reports and web views.
+    - Widgets and JS for UI enhancements.
+    - Assets management (CSS, JS).
+  
+
+
+  4. Module Development
+  Creating custom modules.
+  Manifest file (__manifest__.py).
+  Views:
+    - Form, Tree (List), Kanban, Calendar, Gantt, Graph.
+    - Custom filters and search views.
+  Action buttons and workflows.
+  Menu and Action creation.
+  Chatter integration.
+
+
+
+  5. Advanced Development
+  API Integration:
+    - External API calls with requests library.
+    - Consuming REST APIs in Odoo.
+  Wizards:
+    - Creating dynamic wizards.
+    - Multi-step forms.
+  Scheduled Actions:
+    - Cron jobs and server actions.
+  Custom Reports:
+    - PDF reports using QWeb and wkhtmltopdf.
+    - Excel and CSV reports.
+
+
+  6. Database and ORM
+  PostgreSQL basics:
+    - Database creation and backup.
+    - Queries and indexing.
+  Advanced ORM:
+    - SQL queries in Odoo.
+    - Performance optimization.
+
+
+  7. Website Development
+  Creating custom website pages and modules.
+  Snippet creation.
+  SEO optimization in Odoo websites.
+  eCommerce customization.
+  
+
+  8. Accounting and Localization
+  Accounting setup:
+    - Journals, taxes, and financial reports.
+    - Multi-currency management.
+  Localization and translations:
+    - Import/export of language files.
+    - Translating modules and reports.
+
+
+  9. Odoo Performance Optimization
+  Debugging tools (Odoo shell, logs).
+  Load balancing and caching.
+  Database tuning.
+  Profiling and optimizing code.
+
+
+  10. Deployment and Hosting
+  Development vs. production environments.
+  Deployment on:
+    - Odoo.sh.
+    - Cloud platforms (AWS, Google Cloud, DigitalOcean).
+    - Docker setup for Odoo.
+  SSL setup and domain configuration.
+  
+
+  11. Upgrades and Migration
+  Module versioning and migration best practices.
+  Database migrations (e.g., from v14 to v16).
+  </code></pre>
+  </div>
+
+
+
+
+
+
+
+
+  <div class="content">
+    <p class="section-title">Odoo ka Introduction</p>
+    <p>
+      Odoo ek open-source ERP system hai jo business processes ko automate aur manage karta hai. Ye ek modular system
+      hai jisme har ek functionality ek alag module ke roop me hoti hai.
+    </p>
+
+    <p class="subsection-title">Editions</p>
+    <ul>
+      <li><strong>Community Edition</strong>: Free, basic features, aur customization-friendly.</li>
+      <li><strong>Enterprise Edition</strong>: Paid version, advanced features jaise accounting localization aur extra
+        modules ke saath aata hai.</li>
+    </ul>
+
+    <p class="subsection-title">Architecture aur Framework</p>
+    <p>
+      Odoo ka core architecture Model-View-Controller (MVC) pattern par based hai. Iska matlab hai:
+    </p>
+    <ul>
+      <li><strong>Model</strong>: Data structure aur logic handle karta hai.</li>
+      <li><strong>View</strong>: User interface banata hai.</li>
+      <li><strong>Controller</strong>: Model aur View ke beech coordination karta hai.</li>
+    </ul>
+
+    <p class="section-title">Installation</p>
+    <ul>
+      <li>Windows/Linux/Mac par Odoo setup karna.</li>
+      <li>PostgreSQL ke saath database configure karna.</li>
+      <li>Workspace setup karna (e.g., Visual Studio Code ya PyCharm).</li>
+    </ul>
+
+    <p class="section-title">Odoo Functional Overview</p>
+    <p class="subsection-title">General Navigation</p>
+    <p>
+      Odoo ka UI (user interface) bohot user-friendly hai aur menus aur modules ka structure well-organized hota hai.
+      Kuch important functionalities:
+    </p>
+    <ul>
+      <li><strong>Menus aur Modules</strong>: Odoo ke andar har ek module ka ek menu hota hai, jaise Sales, Inventory,
+        aur CRM. Modules ka structure hierarchically hota hai jo navigation ko easy banata hai.</li>
+      <li><strong>User Interface</strong>: Odoo UI responsive aur customizable hai, jisme kanban, list, aur form views
+        milti hain.</li>
+    </ul>
+
+    <p class="subsection-title">Basic Operations (CRUD)</p>
+    <p>
+      Odoo me CRUD operations kaafi common aur important hain:
+    </p>
+    <ul>
+      <li><strong>Create</strong>: New record banana. Jaise, ek new customer ya invoice create karna.</li>
+      <li><strong>Read</strong>: Existing records dekhna ya unka data access karna.</li>
+      <li><strong>Update</strong>: Kisi record ka data modify karna, jaise ek invoice ka status change karna.</li>
+      <li><strong>Delete</strong>: Records ko permanently remove karna. Jaise, galti se create hui unnecessary records
+        ko delete karna.</li>
+    </ul>
+
+    <p class="section-title">Technical Overview: Odoo Framework</p>
+    <p>
+      Odoo ka architecture modular aur MVC (Model-View-Controller) pattern par based hai. Iska matlab hai ki data ko
+      Model ke zariye manage kiya jata hai, user interface Views ke zariye banaya jata hai, aur Controllers data aur
+      views ke beech interaction handle karte hain.
+    </p>
+
+    <p class="subsection-title">ORM (Object-Relational Mapping)</p>
+    <p>
+      ORM ka kaam database ko Python objects ke saath map karna hai. Models (tables) ko Python classes ke zariye define
+      kiya jata hai, aur ORM SQL queries ko handle karta hai.
+    </p>
+    <p>Example:</p>
+    <pre class="highlight">
+      <code class="language-python">
+class ResPartner(models.Model):
+_name = 'res.partner'
+_description = 'Partners'
+name = fields.Char(string='Name', required=True)
+email = fields.Char(string='Email')
+      </code>
+    </pre>
+
+    <p class="section-title">Views</p>
+    <p>Views user interface ko represent karte hain. Odoo me multiple view types available hain, jo alag-alag context ke
+      liye use hote hain:</p>
+
+    <p class="subsection-title">View Types in Odoo</p>
+
+    <p class="subsection-title">1. Form View (Single Record View)</p>
+    <p>Purpose: Ek record ke details dikhata hai ya modify karta hai.</p>
+    <pre class="highlight">
+      <code class="language-xml">
+&lt;record id="view_partner_form" model="ir.ui.view"&gt;
+&lt;field name="name"&gt;res.partner.form&lt;/field&gt;
+&lt;field name="model"&gt;res.partner&lt;/field&gt;
+&lt;field name="arch" type="xml"&gt;
+    &lt;form string="Partner Form"&gt;
+        &lt;sheet&gt;
+            &lt;group&gt;
+                &lt;field name="name"/&gt;
+                &lt;field name="email"/&gt;
+            &lt;/group&gt;
+        &lt;/sheet&gt;
+    &lt;/form&gt;
+&lt;/field&gt;
+&lt;/record&gt;
+      </code>
+    </pre>
+
+    <p class="subsection-title">2. Tree View (List View)</p>
+    <p>Purpose: Multiple records ka summary list format me dikhata hai.</p>
+    <pre class="highlight">
+      <code class="language-xml">
+&lt;record id="view_partner_tree" model="ir.ui.view"&gt;
+&lt;field name="name"&gt;res.partner.tree&lt;/field&gt;
+&lt;field name="model"&gt;res.partner&lt;/field&gt;
+&lt;field name="arch" type="xml"&gt;
+    &lt;tree string="Partner List"&gt;
+        &lt;field name="name"/&gt;
+        &lt;field name="email"/&gt;
+    &lt;/tree&gt;
+&lt;/field&gt;
+&lt;/record&gt;
+      </code>
+    </pre>
+
+    <p class="subsection-title">3. Kanban View</p>
+    <p>Purpose: Drag-and-drop functionality ke saath records ko visually represent karta hai.</p>
+    <pre class="highlight">
+      <code class="language-xml">
+&lt;record id="view_partner_kanban" model="ir.ui.view"&gt;
+&lt;field name="name"&gt;res.partner.kanban&lt;/field&gt;
+&lt;field name="model"&gt;res.partner&lt;/field&gt;
+&lt;field name="arch" type="xml"&gt;
+    &lt;kanban&gt;
+        &lt;field name="name"/&gt;
+        &lt;templates&gt;
+            &lt;t t-name="kanban-box"&gt;
+                &lt;div class="o_kanban_record"&gt;
+                    &lt;field name="name"/&gt;
+                    &lt;field name="email"/&gt;
+                &lt;/div&gt;
+            &lt;/t&gt;
+        &lt;/templates&gt;
+    &lt;/kanban&gt;
+&lt;/field&gt;
+&lt;/record&gt;
+      </code>
+    </pre>
+
+    <p class="subsection-title">4. Calendar View</p>
+    <p>Purpose: Records ko calendar format me dikhata hai.</p>
+    <pre class="highlight">
+      <code class="language-xml">
+&lt;record id="view_partner_calendar" model="ir.ui.view"&gt;
+&lt;field name="name"&gt;res.partner.calendar&lt;/field&gt;
+&lt;field name="model"&gt;res.partner&lt;/field&gt;
+&lt;field name="arch" type="xml"&gt;
+    &lt;calendar string="Partner Meetings" date_start="start_date"&gt;
+        &lt;field name="name"/&gt;
+    &lt;/calendar&gt;
+&lt;/field&gt;
+&lt;/record&gt;
+      </code>
+    </pre>
+
+    <p class="subsection-title">5. Graph View</p>
+    <p>Purpose: Data ka graphical representation charts ke zariye.</p>
+    <pre class="highlight">
+      <code class="language-xml">
+&lt;record id="view_partner_graph" model="ir.ui.view"&gt;
+&lt;field name="name"&gt;res.partner.graph&lt;/field&gt;
+&lt;field name="model"&gt;res.partner&lt;/field&gt;
+&lt;field name="arch" type="xml"&gt;
+    &lt;graph string="Partner Graph"&gt;
+        &lt;field name="name"/&gt;
+        &lt;field name="email"/&gt;
+    &lt;/graph&gt;
+&lt;/field&gt;
+&lt;/record&gt;
+      </code>
+    </pre>
+
+    <p class="subsection-title">6. Pivot View</p>
+    <p>Purpose: Data ko pivot format me dikhata hai, jo detailed analysis ke liye useful hai.</p>
+    <pre class="highlight">
+      <code class="language-xml">
+&lt;record id="view_partner_pivot" model="ir.ui.view"&gt;
+&lt;field name="name"&gt;res.partner.pivot&lt;/field&gt;
+&lt;field name="model"&gt;res.partner&lt;/field&gt;
+&lt;field name="arch" type="xml"&gt;
+    &lt;pivot string="Partner Pivot"&gt;
+        &lt;field name="name"/&gt;
+        &lt;field name="email"/&gt;
+     &lt;/pivot&gt;
+     &lt;/field&gt;
+       &lt;/record&gt;
+      </code>
+   </pre>
+    <p class="subsection-title">7. Search View</p>
+    <p>Purpose: Records ko search aur filter karne ke liye use hota hai.</p>
+    <p>Example: Search customers by name or email.</p>
+    <pre class="highlight">
+     <code class="language-xml">
+&lt;record id="view_partner_search" model="ir.ui.view"&gt;
+&lt;field name="name"&gt;res.partner.search&lt;/field&gt;
+&lt;field name="model"&gt;res.partner&lt;/field&gt;
+&lt;field name="arch" type="xml"&gt;
+   &lt;search string="Partner Search"&gt;
+       &lt;field name="name"/&gt;
+       &lt;field name="email"/&gt;
+   &lt;/search&gt;
+&lt;/field&gt;
+&lt;/record&gt;
+     </code>
+   </pre>
+
+    <p class="subsection-title">Controllers</p>
+    <p>Controllers client requests ko process karte hain aur appropriate responses dete hain. Iska use custom logic
+      implement karne aur APIs banane me hota hai.</p>
+    <pre class="highlight">
+     <code class="language-python">
+from odoo import http
+
+class PartnerController(http.Controller):
+@http.route('/partners', auth='public', type='json')
+def list_partners(self):
+   partners = http.request.env['res.partner'].search([])
+   return [{'id': partner.id, 'name': partner.name} for partner in partners]
+     </code>
+   </pre>
+
+    <p class="subsection-title">QWeb (Odoo's Template Engine)</p>
+    <p>QWeb ka use dynamic reports aur UI templates ke liye hota hai. XML-based syntax me logic implement kiya jata hai.
+    </p>
+    <pre class="highlight">
+     <code class="language-xml">
+&lt;t t-name="report.partner_details"&gt;
+&lt;t t-foreach="docs" t-as="doc"&gt;
+   &lt;div&gt;
+       &lt;h3&gt;&lt;t t-esc="doc.name"/&gt;&lt;/h3&gt;
+       &lt;p&gt;Email: &lt;t t-esc="doc.email"/&gt;&lt;/p&gt;
+   &lt;/div&gt;
+&lt;/t&gt;
+&lt;/t&gt;          
+     </code>
+   </pre>
+
+
+
+
+
+    <p class="section-title">Conclusion</p>
+    <p>
+      Odoo ek powerful ERP solution hai jo businesses ko automate aur optimize karne me madad karta hai. Iska
+      architecture modular hai, jo easy customization aur scalability ki suvidha deta hai. Views aur models ki
+      flexibility se businesses apne specific needs ke liye Odoo ko customize kar sakte hain.
+    </p>
+
+    <p>Ye overview Odoo ke core concepts ko samajhne me madad karega. Aap apni requirements ke according modules aur
+      views ko customize kar sakte hain.</p>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="content" style="background-color: #aab4ff85;">
+    <p class="section-title">2. Addons Structure and Module Development in Odoo</p>
+    <p>Odoo me addons ek modular way me functionality add karne ke liye use hote hain. Har module ek addon hota hai jo
+      specific features, models, views, controllers, reports, etc. ko implement karta hai. Agar aap apna custom
+      functionality develop karna chahte hain, toh aapko Odoo ke addons structure ko samajhna zaroori hai.</p>
+
+    <p class="subsection-title">1. Addons Structure Overview</p>
+    <p>Odoo ke addons ka structure ek standard format me hota hai. Har module ek folder me rehta hai, aur iske andar
+      kuch basic files aur directories hoti hain.</p>
+
+    <pre class="highlight">
+    <code class="language-scss">
+my_custom_module/
+├── __manifest__.py
+├── models/
+│   └── __init__.py
+│   └── my_model.py
+├── views/
+│   └── my_view.xml
+├── controllers/
+│   └── __init__.py
+│   └── my_controller.py
+├── data/
+│   └── my_data.xml
+├── security/
+│   └── ir.model.access.csv
+└── static/
+  └── description/
+      └── icon.png
+    </code>
+  </pre>
+
+    <p class="subsection-title">2. Key Files and Directories in a Module</p>
+
+    <p class="subsection-title">__manifest__.py (Manifest File):</p>
+    <p>Har module ka ek __manifest__.py file hona chahiye. Is file me module ke baare me essential information hoti hai,
+      jaise ki module ka name, version, dependencies, aur views. Ye file Odoo ko batata hai ki module ko kaise install,
+      upgrade, ya uninstall kiya jaye.</p>
+
+    <pre class="highlight">
+    <code class="language-python">
+{
+'name': 'My Custom Module',
+'version': '1.0',
+'category': 'Tools',
+'description': 'This is my custom Odoo module.',
+'author': 'Your Name',
+'depends': ['base'],
+'data': [
+  'views/my_view.xml',
+  'security/ir.model.access.csv',
+],
+'installable': True,
+'application': True,
+}
+    </code>
+  </pre>
+
+    <p class="subsection-title">models/ Directory:</p>
+    <p>Is directory me aap apne models define karte hain. Models Odoo ke database tables ko represent karte hain aur
+      unke saath interact karte hain. Har model ek Python class hoti hai jo models.Model se inherit hoti hai.</p>
+
+    <pre class="highlight">
+    <code class="language-python">
+from odoo import models, fields
+
+class MyModel(models.Model):
+_name = 'my.custom.model'
+_description = 'Custom Model for My Module'
+
+name = fields.Char(string='Name', required=True)
+description = fields.Text(string='Description')
+    </code>
+  </pre>
+
+    <p class="subsection-title">views/ Directory:</p>
+    <p>Views me aap Odoo ke user interface (UI) ko define karte hain. Views me aap form, tree, kanban, search, etc.
+      define karte hain. Ye views XML files me define hoti hain.</p>
+
+    <pre class="highlight">
+    <code class="language-xml">
+&lt;odoo&gt;
+&lt;record id="view_my_model_form" model="ir.ui.view"&gt;
+  &lt;field name="name"&gt;my.model.form&lt;/field&gt;
+  &lt;field name="model"&gt;my.custom.model&lt;/field&gt;
+  &lt;field name="arch" type="xml"&gt;
+      &lt;form string="My Custom Model"&gt;
+          &lt;group&gt;
+              &lt;field name="name"/&gt;
+              &lt;field name="description"/&gt;
+          &lt;/group&gt;
+      &lt;/form&gt;
+  &lt;/field&gt;
+&lt;/record&gt;
+
+&lt;record id="view_my_model_tree" model="ir.ui.view"&gt;
+  &lt;field name="name"&gt;my.model.tree&lt;/field&gt;
+  &lt;field name="model"&gt;my.custom.model&lt;/field&gt;
+  &lt;field name="arch" type="xml"&gt;
+      &lt;tree string="My Custom Models"&gt;
+          &lt;field name="name"/&gt;
+          &lt;field name="description"/&gt;
+      &lt;/tree&gt;
+  &lt;/field&gt;
+&lt;/record&gt;
+&lt;/odoo&gt;
+    </code>
+  </pre>
+
+    <p class="subsection-title">controllers/ Directory:</p>
+    <p>Controllers user ke request ko process karte hain aur response generate karte hain. Agar aap custom APIs ya web
+      pages create karna chahte hain, toh controllers ka use hota hai. Controllers ko Python classes ke roop me define
+      kiya jata hai jo http.Controller se inherit hoti hain.</p>
+
+    <pre class="highlight">
+    <code class="language-python">
+from odoo import http
+
+class MyController(http.Controller):
+@http.route('/my/custom/page', auth='public', website=True)
+def custom_page(self, **kw):
+  return http.request.render('my_custom_module.custom_template')
+    </code>
+  </pre>
+
+    <p class="subsection-title">security/ Directory:</p>
+    <p>Is directory me aap apne module ke liye access control lists (ACLs) aur record rules define karte hain.
+      ir.model.access.csv file me model-level permissions (Create, Read, Write, Delete) specify kiye jaate hain.</p>
+
+    <pre class="highlight">
+    <code class="language-csv">
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_my_custom_model,my.custom.model,model_my_custom_model,,1,1,1,1
+    </code>
+  </pre>
+
+    <p class="subsection-title">static/ Directory:</p>
+    <p>Agar aapko module me static assets (images, CSS, JavaScript) add karna ho toh ye assets static/ folder me rakhe
+      jaate hain. Iska use aap module ke UI ko customize karne ke liye karte hain.</p>
+
+    <pre class="highlight">
+    <code class="language-scss">
+static/
+└── description/
+  └── icon.png
+    </code>
+  </pre>
+
+    <p class="subsection-title">3. Module Development Process</p>
+    <p>Step 1: Module Structure Banayein - Sabse pehle, aapko apne module ka folder structure set karna hoga. Iske baad,
+      __manifest__.py file me module ka basic information fill karen.</p>
+    <p>Step 2: Models Aur Views Banayein - Models define karke unme fields, relationships, aur methods implement karen.
+      Views banakar unko user-friendly UI ke roop me design karen.</p>
+    <p>Step 3: Controllers Agar Zaroorat Ho Toh - Agar aapko custom APIs ya web pages create karne hain, toh controllers
+      banayein. Controllers ka use aap routing aur web page responses ke liye kar sakte hain.</p>
+    <p>Step 4: Security Aur Access Control - Access control aur permissions ko security/ir.model.access.csv file me
+      define karen.</p>
+    <p>Step 5: Testing Aur Debugging - Module ko install karne ke baad aapko uska testing karna zaroori hai. Agar koi
+      issue aaye toh usse debug karen aur fix karen.</p>
+    <p>Step 6: Module Installation - Apne module ko Odoo ke addons path me rakhen aur Odoo server ko restart karen. Odoo
+      UI se module ko install karen.</p>
+    <p>Step 7: Version Control Aur Documentation - Apne code ko version control system (jaise Git) me store karen aur
+      proper documentation banayein.</p>
+
+    <p class="subsection-title">Example of Complete Custom Module:</p>
+    <ul>
+      <li>__manifest__.py: Module info.</li>
+      <li>models/my_model.py: Model with fields.</li>
+      <li>views/my_view.xml: Form and tree views for the model.</li>
+      <li>security/ir.model.access.csv: Access control.</li>
+      <li>controllers/my_controller.py: Custom routes (if any).</li>
+    </ul>
+
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="content">
+    <h1>Server-Side Development in Odoo</h1>
+    <p>Odoo ka server-side development <span class="important">Python</span> programming language me hota hai. Odoo ka
+      core functionality Python me likha gaya hota hai, aur aap jo bhi custom module banate hain, wo bhi Python ke
+      through hi handle hota hai. Server-side development me aapko Python basics, Odoo ke ORM (Object Relational
+      Mapping) methods, models, fields, and constraints ko samajhna zaroori hai.</p>
+
+    <h2 class="section-title">1. Python Basics for Odoo</h2>
+    <p>Odoo ka development Python me hota hai, isliye Python ka basic knowledge hona zaroori hai. Odoo me aapko Python
+      ke classes, methods, aur basic syntax ko samajhna hoga. Python me likhe gaye functions aur methods Odoo ke
+      server-side logic ko control karte hain.</p>
+
+    <h3 class="subsection-title">Basic Python Concepts for Odoo Development:</h3>
+    <ul>
+      <li><strong>Classes:</strong> Odoo me har ek model ek Python class hoti hai jo <code>models.Model</code> se
+        inherit karti hai.</li>
+      <li><strong>Methods:</strong> Odoo me models me methods likhkar aap business logic ko define kar sakte hain.</li>
+      <li><strong>Inheritance:</strong> Aap models ko inherit karke unki properties aur methods ko extend kar sakte
+        hain.</li>
+    </ul>
+
+    <h3 class="subsection-title">Example of Python Class in Odoo:</h3>
+    <pre class="highlight">
+    <code class="language-python">
+from odoo import models, fields
+
+class MyCustomModel(models.Model):
+  _name = 'my.custom.model'
+  _description = 'My Custom Model'
+
+  name = fields.Char(string='Name', required=True)
+  description = fields.Text(string='Description')
+    </code>
+  </pre>
+
+    <h2 class="section-title">2. Models in Odoo</h2>
+    <p>Odoo me models ko define karne ke liye aapko Python class ka use karna padta hai. Models Odoo ke ORM ka part hote
+      hain aur ye directly database tables se connected hote hain. Models me aapko kuch important attributes aur fields
+      define karni padti hain.</p>
+
+    <h3 class="subsection-title">Important Model Attributes:</h3>
+    <ul>
+      <li><strong>_name (Model Name):</strong> Ye attribute model ka name define karta hai, jo database table ka naam
+        bhi hota hai.<br>Example: <code>_name = 'my.custom.model'</code></li>
+      <li><strong>_description (Model Description):</strong> Ye attribute model ki description ko define karta
+        hai.<br>Example: <code>_description = 'My Custom Model for managing data'</code></li>
+      <li><strong>_inherit (Model Inheritance):</strong> Agar aapko existing Odoo model ko extend karna ho, toh aap
+        <code>_inherit</code> attribute ka use karte hain.<br>Example: <code>_inherit = 'res.partner'</code>
+      </li>
+      <li><strong>_rec_name (Record Name):</strong> Ye attribute specify karta hai ki record ka naam kaunsa field
+        display karega.<br>Example: <code>_rec_name = 'name'</code></li>
+    </ul>
+
+    <h3 class="subsection-title">XML Example:</h3>
+    <pre class="highlight">
+    <code class="language-xml">
+<data>
+<record id="my_custom_model_form" model="ir.ui.view">
+  <field name="name">my.custom.model.form</field>
+  <field name="model">my.custom.model</field>
+  <field name="arch" type="xml">
+    <form string="My Custom Model">
+      <sheet>
+        <group>
+          <field name="name"/>
+          <field name="description"/>
+        </group>
+      </sheet>
+    </form>
+  </field>
+</record>
+</data>
+    </code>
+  </pre>
+
+    <p><strong>Summary:</strong> Ye concepts aapko server-side development me kaafi help karenge, aur aap easily custom
+      modules aur logic implement kar paenge.</p>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="content" style="background-color: #d9fcb18a;">
+    <h1>ORM Methods and Decorators in Odoo</h1>
+    <p>Odoo me ORM (Object Relational Mapping) ek bahut zaroori concept hai, jiska use aap database ke records ko manage
+      karne ke liye karte hain. ORM methods ka use karke aap Odoo me CRUD (Create, Read, Update, Delete) operations
+      perform karte hain, jo ki aapke models aur database ke beech interaction ko handle karte hain. ORM methods ke
+      alawa kuch decorators bhi hote hain jo methods ki behavior ko modify karte hain. Main yeh sab cheezein aapko
+      detail me samjhaunga.</p>
+
+    <h2 class="section-title">1. ORM Methods</h2>
+    <p>Odoo me ORM methods ka use aap record create karne, update karne, delete karne, records ko search karne, aur
+      fetch karne ke liye karte hain.</p>
+
+    <h3 class="subsection-title">create() Method:</h3>
+    <p><strong>Purpose:</strong> Naye record ko create karne ke liye.<br>
+      <strong>Use:</strong> Jab aapko apne model me naya record insert karna ho, tab create() method ka use hota hai.
+    </p>
+    <pre class="highlight">
+    <code class="language-python">
+# Create a new record for the 'res.partner' model
+partner = self.env['res.partner'].create({
+  'name': 'John Doe',
+  'email': 'john.doe@example.com'
+})
+    </code>
+  </pre>
+    <p>Is example me, hum <code>res.partner</code> model me naya partner record create kar rahe hain.
+      <code>create()</code> method me ek dictionary pass hota hai jisme fields aur unke values define hote hain.
+    </p>
+
+    <h3 class="subsection-title">write() Method:</h3>
+    <p><strong>Purpose:</strong> Existing record ko update karne ke liye.<br>
+      <strong>Use:</strong> Jab aapko kisi record ko update karna ho, toh aap write() method ka use karte hain.
+    </p>
+    <pre class="highlight">
+    <code class="language-python">
+# Update the partner's email address
+partner.write({
+  'email': 'new.email@example.com'
+})
+    </code>
+  </pre>
+    <p>Is example me, hum partner record ka email address update kar rahe hain.</p>
+
+    <h3 class="subsection-title">unlink() Method:</h3>
+    <p><strong>Purpose:</strong> Records ko delete karne ke liye.<br>
+      <strong>Use:</strong> Jab aapko kisi record ko delete karna ho, tab unlink() method ka use hota hai.
+    </p>
+    <pre class="highlight">
+    <code class="language-python">
+# Delete the partner record
+partner.unlink()
+    </code>
+  </pre>
+    <p>Yahaan, hum partner record ko delete kar rahe hain. <code>unlink()</code> method se record ko permanently delete
+      kiya jaata hai.</p>
+
+    <h3 class="subsection-title">search() Method:</h3>
+    <p><strong>Purpose:</strong> Records ko search karne ke liye.<br>
+      <strong>Use:</strong> search() method ka use aapko specific conditions ke basis par records ko find karne ke liye
+      hota hai.
+    </p>
+    <pre class="highlight">
+    <code class="language-python">
+# Search for partners with name 'John Doe'
+partner = self.env['res.partner'].search([('name', '=', 'John Doe')])
+    </code>
+  </pre>
+    <p>Is example me, hum <code>res.partner</code> model se "John Doe" naam ke partners ko search kar rahe hain.</p>
+
+    <h3 class="subsection-title">browse() Method:</h3>
+    <p><strong>Purpose:</strong> Specific records ko retrieve karne ke liye.<br>
+      <strong>Use:</strong> Jab aapko ek ya zyada records ko unki IDs ke basis par fetch karna ho, tab browse() method
+      ka use hota hai.
+    </p>
+    <pre class="highlight">
+    <code class="language-python">
+# Fetch a partner record using its ID
+partner = self.env['res.partner'].browse(1)
+    </code>
+  </pre>
+    <p>Is example me, hum partner record ko ID 1 ke basis par fetch kar rahe hain.</p>
+
+    <h2 class="section-title">2. Onchange and Default Methods</h2>
+    <h3 class="subsection-title">onchange() Method:</h3>
+    <p><strong>Purpose:</strong> Jab user form view me kisi field ko change karta hai, tab onchange() method
+      automatically call hota hai.</p>
+    <pre class="highlight">
+    <code class="language-python">
+class SaleOrder(models.Model):
+  _name = 'sale.order'
+
+  price_unit = fields.Float('Unit Price')
+  price_total = fields.Float('Total Price')
+
+  @api.onchange('price_unit')
+  def _onchange_price_unit(self):
+      self.price_total = self.price_unit * 10
+    </code>
+  </pre>
+    <p>Is example me, jab <code>price_unit</code> field ko change kiya jaayega, tab <code>price_total</code>
+      automatically calculate ho jayega.</p>
+
+    <h3 class="subsection-title">default() Method:</h3>
+    <p><strong>Purpose:</strong> Jab new record create hota hai, tab aap default() method se kisi field ki default value
+      set kar sakte hain.</p>
+    <pre class="highlight">
+    <code class="language-python">
+class SaleOrder(models.Model):
+  _name = 'sale.order'
+
+  price_unit = fields.Float('Unit Price', default=100.0)
+    </code>
+  </pre>
+
+    <h2 class="section-title">3. Decorators in Odoo</h2>
+    <p><strong>@api.model</strong>, <strong>@api.multi</strong>, and <strong>@api.depends</strong> decorators Odoo me
+      commonly used hote hain. Ye methods ke behavior ko modify karte hain.</p>
+    <pre class="highlight">
+    <code class="language-python">
+# Example for @api.depends
+class SaleOrder(models.Model):
+  _name = 'sale.order'
+
+  price_unit = fields.Float('Unit Price')
+  quantity = fields.Integer('Quantity')
+  total_price = fields.Float('Total Price', compute='_compute_total_price')
+
+  @api.depends('price_unit', 'quantity')
+  def _compute_total_price(self):
+      for record in self:
+          record.total_price = record.price_unit * record.quantity
+    </code>
+  </pre>
+    <p>Is example me, <code>total_price</code> field <code>price_unit</code> aur <code>quantity</code> ke basis par
+      calculate hota hai.</p>
+  </div>
+
+
+
+
+
+
+  <div class="content">
+    <h2 class="section-title">Odoo Security: Access Rights, Record Rules, Groups, and Users (Detailed Explanation in
+      Your Language)</h2>
+    <p>Odoo me security ek important aspect hai jo aapke system ke users ko appropriate access rights dene, records ko
+      protect karne, aur sensitive data ko secure karne me madad karta hai. Security ko manage karne ke liye, Odoo me
+      kuch key concepts hain jaise access rights, record rules, groups, aur users.</p>
+
+    <h3 class="subsection-title">1. Access Rights</h3>
+    <p>Access rights ka use aap user groups ko define karne ke liye karte hain, jisme aap unko kisi specific model
+      (jaise: Sales, Inventory, Accounting) pe perform karne ke liye permissions dete hain. Aapko yeh define karna hota
+      hai ki user kis model pe Create, Read, Write, aur Delete operations perform kar sakte hain.</p>
+
+    <h4 class="subsection-title">Types of Access Rights:</h4>
+    <ul>
+      <li><strong>Create:</strong> User ko new record create karne ki permission.</li>
+      <li><strong>Read:</strong> User ko record dekhne ki permission.</li>
+      <li><strong>Write:</strong> User ko record ko update karne ki permission.</li>
+      <li><strong>Delete:</strong> User ko record ko delete karne ki permission.</li>
+    </ul>
+    <p>Example:</p>
+    <p>Aap ek group "Sales Manager" bana sakte hain, jo Sales Order model par Create, Read, Write, aur Delete rights
+      rakhta ho. Yeh aap ir.model.access.csv file ke through define kar sakte hain.</p>
+    <pre><code>
+access_sales_manager,access.sales.manager,model_sale_order,base.group_sale_manager,1,1,1,1
+  </code></pre>
+    <p>Is example me, Sales Manager group ko Sales Order model par Create, Read, Write, aur Delete rights mil rahe hain.
+      CSV file me 1 ka matlab hai ki user ko woh permission milega.</p>
+
+    <h3 class="subsection-title">2. Record Rules</h3>
+    <p>Record rules ka use aap karte hain taaki aap specific records ko filter kar sakein jo ek user dekh sakta hai.
+      Record rules data ko restrict karte hain, matlab agar aap chahte hain ki ek user sirf apne hi department ke
+      records dekh sake, toh aap record rule bana sakte hain.</p>
+
+    <h4 class="subsection-title">Record Rule Components:</h4>
+    <ul>
+      <li><strong>Domain:</strong> Yeh ek filter expression hota hai jo records ko filter karta hai (jaise department_id
+        = 1).</li>
+      <li><strong>Groups:</strong> Yeh define karta hai ki yeh rule kis user group ke liye applicable hai.</li>
+      <li><strong>Apply for Read/Write:</strong> Yeh decide karta hai ki rule read operations par apply hoga ya write
+        operations par.</li>
+    </ul>
+    <p>Example:</p>
+    <p>Maan lijiye aapko ek rule banana hai jisme Sales Manager ko sirf unhi sales orders ko dekhne ki permission mile
+      jo unke department ke liye hain.</p>
+    <pre><code>
+Rule ka naam: "Sales Order for My Department"
+Domain: ['&', ('department_id', '=', user.department_id), ('state', '=', 'draft')]
+Apply for: Read Access
+  </code></pre>
+    <p>Yahaan, hum record rule me domain use kar rahe hain jisme department_id ko current user ke department ke saath
+      match kiya jaa raha hai. Is rule ko sirf Sales Manager group pe apply kiya jaayega.</p>
+
+    <h3 class="subsection-title">3. Groups</h3>
+    <p>Odoo me groups ka use users ko specific permissions aur access rights dene ke liye hota hai. Har user ko ek ya
+      zyada groups assign kiye jaate hain, aur har group ko specific access rights diye jaate hain. Groups ko models aur
+      views ke permissions manage karne ke liye use kiya jaata hai.</p>
+
+    <h4 class="subsection-title">Types of Groups in Odoo:</h4>
+    <ul>
+      <li><strong>System Groups:</strong> Yeh predefined groups hote hain jo system ki functionality ke liye hote hain,
+        jaise Administrator, User, Manager.</li>
+      <li><strong>Custom Groups:</strong> Yeh aap khud bana sakte hain jisme aap specific access rights define karte
+        hain.</li>
+    </ul>
+    <p>Example of a Group:</p>
+    <p>Maan lijiye aap ek custom group create karna chahte hain, jo Inventory Manager ke liye ho. Is group ko aap
+      Inventory model par Read, Write aur Create permissions de sakte hain.</p>
+    <pre><code>
+&lt;record id="group_inventory_manager" model="res.groups"&gt;
+  &lt;field name="name"&gt;Inventory Manager&lt;/field&gt;
+  &lt;field name="category_id" ref="base.module_category_inventory"/&gt;
+&lt;/record&gt;
+  </code></pre>
+    <p>Is XML definition me, hum ek custom group Inventory Manager create kar rahe hain jo Inventory module ke andar
+      define hota hai.</p>
+
+    <h3 class="subsection-title">4. Users</h3>
+    <p>Users ko Odoo me define karke unhe specific permissions aur groups assign kiye jaate hain. Har user ko ek ya
+      zyada roles (groups) milte hain jo unke access rights ko define karte hain.</p>
+
+    <h4 class="subsection-title">User Creation:</h4>
+    <p>User ko Odoo me create karne ke liye, aapko unka basic information jaise name, login credentials, aur group
+      assignments deni hoti hain. User ko ek group assign karne se usko us group ke permissions mil jaate hain.</p>
+    <p>Example of User Creation:</p>
+    <p>Aap ek user John Doe ko create kar rahe hain aur usko Sales Manager aur Inventory User groups assign kar rahe
+      hain.</p>
+    <pre><code>
+&lt;record id="user_sales_manager" model="res.users"&gt;
+  &lt;field name="name"&gt;John Doe&lt;/field&gt;
+  &lt;field name="login"&gt;johndoe&lt;/field&gt;
+  &lt;field name="groups_id" eval="[(4, ref('sales_team.group_sale_manager'))]"/&gt;
+&lt;/record&gt;
+  </code></pre>
+    <p>Is XML definition me, hum ek user John Doe create kar rahe hain jise Sales Manager group assign kiya gaya hai.
+    </p>
+
+    <h3 class="section-title">Summary in Your Language</h3>
+    <h4 class="subsection-title">Access Rights:</h4>
+    <p>Access rights aapko user groups ko permission dene ke liye use karte hain ki wo kis model par CRUD operations kar
+      sakte hain. Jaise Create, Read, Write, aur Delete permissions.</p>
+    <h4 class="subsection-title">Record Rules:</h4>
+    <p>Record rules ka use aap karte hain taaki aap specific records ko filter kar sakein. Jaise ek user ko sirf unhi
+      records ko dekhne ki permission mile jo unki department se related hain.</p>
+    <h4 class="subsection-title">Groups:</h4>
+    <p>Groups me aap users ko assign karte hain aur unhe specific permissions aur access rights dete hain. Aap
+      predefined groups ka use kar sakte hain, ya phir custom groups bana sakte hain.</p>
+    <h4 class="subsection-title">Users:</h4>
+    <p>Users ko create karne ke baad, unhe ek ya zyada groups assign kiye jaate hain, jo unko specific access rights
+      dete hain. Aap users ko custom roles ke saath configure kar sakte hain.</p>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="content" style="background-color: #ffc9c997;">
+    <h1>Module Development in Odoo - Detailed Explanation with Examples</h1>
+    <p>Odoo mein module development ek important skill hai jo aapko custom functionalities aur features create karne
+      mein madad karta hai. Har module ko logically alag rakha jaata hai, aur har ek module ka apna kaam hota hai. Yahan
+      hum Odoo ke custom modules ke baare mein detailed explanation de rahe hain, jisme hum views, manifest file,
+      models, aur related concepts ko deeply samjhenge.</p>
+
+    <h2 class="section-title">1. Creating Custom Modules in Odoo</h2>
+    <p>Odoo mein custom module banate waqt, aapko ek specific structure follow karna padta hai. Yeh structure aapke
+      module ko Odoo system ke andar integrate karne mein madad karta hai.</p>
+
+    <h3 class="subsection-title">Basic Module Structure</h3>
+    <p>Ek module ke liye basic folder structure kuch is tarah dikhega:</p>
+
+    <pre class="highlight"><code>bash
+my_custom_module/
+├── __init__.py              # Python package initialization
+├── __manifest__.py          # Module configuration
+├── models/                  # Python models
+│   └── __init__.py          # Initialize models
+│   └── my_model.py          # Define models
+├── views/                   # XML views
+│   └── my_model_views.xml   # Views for the model
+└── security/                # Security configuration
+  └── ir.model.access.csv  # Access control for models
+</code></pre>
+
+    <ul>
+      <li><strong>__init__.py:</strong> Yeh Python file module ko ek package banaati hai.</li>
+      <li><strong>__manifest__.py:</strong> Yeh file module ke baare mein metadata provide karti hai.</li>
+      <li><strong>models/:</strong> Yahan pe Python files hoti hain jahan aap models define karte hain.</li>
+      <li><strong>views/:</strong> Yahan pe aap views ko define karte hain (XML format mein).</li>
+      <li><strong>security/:</strong> Yahan pe aap module ke liye access control aur user permissions define karte hain.
+      </li>
+    </ul>
+
+    <h2 class="section-title">2. The Manifest File (__manifest__.py)</h2>
+    <p>Odoo mein har module ko define karte waqt, manifest file zaroori hoti hai. Yeh file ek Python dictionary ke roop
+      mein hoti hai, jo module ke metadata ko store karti hai jaise module ka naam, version, dependencies, aur kaunse
+      files ko load karna hai.</p>
+
+    <h3 class="subsection-title">Example: Manifest File (__manifest__.py)</h3>
+    <pre class="highlight"><code>python
+{
+  'name': 'My Custom Module',  # Module ka naam
+  'version': '1.0',            # Module ki version
+  'category': 'Custom',        # Module ka category
+  'author': 'Your Name',       # Aapka naam
+  'depends': ['base', 'sale'], # Module ke dependencies (base, sale, etc.)
+  'data': [
+      'views/my_model_views.xml',  # Views ko load karne ki file
+      'security/ir.model.access.csv',  # Security aur access controls
+  ],
+  'installable': True,           # Module ko install kiya jaa sakta hai
+  'application': True,           # Module ko application ke roop mein use karna
+}
+</code></pre>
+
+    <ul>
+      <li><strong>name:</strong> Module ka naam jo Odoo ke interface mein dikhai deta hai.</li>
+      <li><strong>version:</strong> Module ki version number.</li>
+      <li><strong>depends:</strong> Yeh list batata hai ki module kis-kis doosre modules par depend karta hai.</li>
+      <li><strong>data:</strong> Yeh list batata hai ki module ke installation ke baad kis-kis files ko load kiya jayega
+        (views, reports, security).</li>
+      <li><strong>installable:</strong> Agar True hai, toh module install ho sakta hai.</li>
+      <li><strong>application:</strong> Agar True hai, toh yeh module application ke roop mein Odoo ke dashboard pe
+        dikhega.</li>
+    </ul>
+
+    <h2 class="section-title">3. Views in Odoo</h2>
+    <p>Odoo mein views ka use data ko display karne aur user se interact karne ke liye hota hai. Har view ka ek specific
+      role hota hai, jaise data ko edit karna (Form View), list mein dikhana (Tree View), ya time-based data ko display
+      karna (Calendar View).</p>
+
+    <h3 class="subsection-title">Common Views in Odoo</h3>
+    <p><strong>Form View:</strong> Form view ka use data ko edit karne ke liye hota hai.</p>
+
+    <h4>Example: Form View</h4>
+    <pre class="highlight"><code>xml
+&lt;odoo&gt;
+  &lt;!-- Form View for My Model --&gt;
+  &lt;record id="view_form_my_model" model="ir.ui.view"&gt;
+      &lt;field name="name"&gt;my.model.form&lt;/field&gt;  &lt;!-- View ka naam --&gt;
+      &lt;field name="model"&gt;my.model&lt;/field&gt;      &lt;!-- Model jise form mein show karna hai --&gt;
+      &lt;field name="arch" type="xml"&gt;
+          &lt;form string="My Model Form"&gt;
+              &lt;sheet&gt;
+                  &lt;group&gt;
+                      &lt;field name="name"/&gt;           &lt;!-- Field to show in form --&gt;
+                      &lt;field name="description"/&gt;    &lt;!-- Another field --&gt;
+                  &lt;/group&gt;
+              &lt;/sheet&gt;
+          &lt;/form&gt;
+      &lt;/field&gt;
+  &lt;/record&gt;
+&lt;/odoo&gt;
+</code></pre>
+
+    <p><strong>Tree (List) View:</strong> Yeh view records ko ek list mein show karta hai.</p>
+
+    <h4>Example: Tree (List) View</h4>
+    <pre class="highlight"><code>xml
+&lt;odoo&gt;
+  &lt;!-- Tree View for My Model --&gt;
+  &lt;record id="view_tree_my_model" model="ir.ui.view"&gt;
+      &lt;field name="name"&gt;my.model.tree&lt;/field&gt;
+      &lt;field name="model"&gt;my.model&lt;/field&gt;
+      &lt;field name="arch" type="xml"&gt;
+          &lt;tree string="My Model List"&gt;
+              &lt;field name="name"/&gt;           &lt;!-- Field to display in list --&gt;
+              &lt;field name="description"/&gt;    &lt;!-- Another field to display --&gt;
+          &lt;/tree&gt;
+      &lt;/field&gt;
+  &lt;/record&gt;
+&lt;/odoo&gt;
+</code></pre>
+
+    <p><strong>Kanban View:</strong> Kanban view ko visual way mein records dikhane ke liye use kiya jaata hai, jaise
+      task management ke liye.</p>
+
+    <h4>Example: Kanban View</h4>
+    <pre class="highlight"><code>xml
+&lt;odoo&gt;
+  &lt;!-- Kanban View for My Model --&gt;
+  &lt;record id="view_kanban_my_model" model="ir.ui.view"&gt;
+      &lt;field name="name"&gt;my.model.kanban&lt;/field&gt;
+      &lt;field name="model"&gt;my.model&lt;/field&gt;
+      &lt;field name="arch" type="xml"&gt;
+          &lt;kanban&gt;
+              &lt;field name="name"/&gt;           &lt;!-- Field to show in kanban card --&gt;
+              &lt;templates&gt;
+                  &lt;t t-name="kanban-box"&gt;
+                      &lt;div class="oe_kanban_card"&gt;
+                          &lt;field name="name"/&gt;   &lt;!-- Show name on kanban card --&gt;
+                      &lt;/div&gt;
+                  &lt;/t&gt;
+              &lt;/templates&gt;
+          &lt;/kanban&gt;
+      &lt;/field&gt;
+  &lt;/record&gt;
+&lt;/odoo&gt;
+</code></pre>
+
+    <h2 class="section-title">4. Custom Filters and Search Views</h2>
+    <p>Odoo mein search views aur custom filters ka use records ko filter karne aur search karne ke liye hota hai. Yeh
+      user ko specific data ko quickly find karne mein madad karte hain.</p>
+
+    <h4>Example: Search View</h4>
+    <pre class="highlight"><code>xml
+&lt;odoo&gt;
+  &lt;record id="view_search_my_model" model="ir.ui.view"&gt;
+      &lt;field name="name"&gt;my.model.search&lt;/field&gt;
+      &lt;field name="model"&gt;my.model&lt;/field&gt;
+      &lt;field name="arch" type="xml"&gt;
+          &lt;search&gt;
+              &lt;field name="name"/&gt;
+              &lt;field name="description"/&gt;
+          &lt;/search&gt;
+      &lt;/field&gt;
+  &lt;/record&gt;
+&lt;/odoo&gt;
+</code></pre>
+
+    <p>Odoo mein module development ke liye yeh ek basic introduction hai. Aap ise customize kar ke apne requirements ke
+      hisaab se module bana sakte hain. Har step mein, aapko code ko properly organize karna hoga aur Odoo ke best
+      practices follow karni hogi.</p>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="content">
+    <h1>5. Advanced Development in Odoo - Deep Dive</h1>
+    <p>Odoo mein Advanced Development ka focus hota hai complex functionalities ko efficiently handle karne par. Yeh
+      features API Integration, Wizards, Scheduled Actions, aur Custom Reports ko implement karne ki processes ko cover
+      karte hain. In techniques ka istemal karke hum Odoo ko customized aur automated bana sakte hain, jo real-world
+      business needs ko efficiently solve kare.</p>
+
+    <div class="section-title">1. API Integration: External API Calls with requests Library</div>
+    <p>API Integration ka use karke aap Odoo ko external data sources ke saath interact karne ke liye set kar sakte
+      hain. External APIs se data fetch karke, aap us data ko Odoo ke records mein store kar sakte hain.</p>
+    <p><strong>Use Case:</strong> Maan lijiye ki aapko kisi external weather API se current weather details fetch karne
+      hain aur unhe Odoo ke Weather model mein store karna hai.</p>
+
+    <div class="subsection-title">Steps to Call External API:</div>
+    <ul>
+      <li><strong>API Call:</strong> Odoo mein requests library ko use karke external API call karte hain.</li>
+      <li><strong>Data Parsing:</strong> API response ko JSON format mein parse karte hain.</li>
+      <li><strong>Data Store:</strong> Data ko Odoo ke models mein store karte hain.</li>
+    </ul>
+
+    <div class="subsection-title">Code Example:</div>
+    <pre><code class="language-python">
+import requests
+from odoo import models, fields, _
+
+class WeatherDataFetch(models.Model):
+  _name = 'weather.data.fetch'
+
+  city = fields.Char('City')
+  temperature = fields.Float('Temperature')
+  description = fields.Char('Description')
+
+  def fetch_weather(self):
+      # External weather API URL
+      api_url = "http://api.weatherapi.com/v1/current.json?key=YOUR_API_KEY&q=London"
+      
+      # API se data fetch karte hain
+      response = requests.get(api_url)
+      
+      # Agar response successful hai (HTTP 200)
+      if response.status_code == 200:
+          data = response.json()  # JSON response ko parse karo
+          
+          # Data ko Odoo model mein save karte hain
+          self.env['weather.data.fetch'].create({
+              'city': data['location']['name'],
+              'temperature': data['current']['temp_c'],
+              'description': data['current']['condition']['text']
+          })
+      else:
+          _logger.error("Failed to fetch weather data from the API")
+    </code></pre>
+
+    <div class="section-title">2. Consuming REST APIs in Odoo</div>
+    <p>REST APIs ka use karke hum external data ko consume karte hain aur Odoo mein store karte hain. Aap third-party
+      applications se data fetch kar sakte hain, jaise payment gateways, weather APIs, CRM tools, etc.</p>
+
+    <div class="subsection-title">Use Case:</div>
+    <p>Maan lijiye aapko kisi external service se product data fetch karna hai aur Odoo ke Product model mein save karna
+      hai.</p>
+
+    <div class="subsection-title">Steps:</div>
+    <ul>
+      <li><strong>API Call:</strong> External API ko call karte hain.</li>
+      <li><strong>Data Handling:</strong> Response mein aaye data ko process karte hain.</li>
+      <li><strong>Model Data Insertion:</strong> Data ko Odoo ke models mein insert karte hain.</li>
+    </ul>
+
+    <div class="subsection-title">Code Example:</div>
+    <pre><code class="language-python">
+class ExternalProductData(models.Model):
+  _name = 'external.product.data'
+  
+  name = fields.Char('Product Name')
+  price = fields.Float('Price')
+
+  def fetch_product_data(self):
+      # External API URL se product data fetch karte hain
+      api_url = "https://api.example.com/products"
+      response = requests.get(api_url)
+
+      if response.status_code == 200:
+          products = response.json()  # API se JSON data ko fetch karte hain
+          for product in products:
+              # Odoo model mein product data insert karte hain
+              self.env['product.template'].create({
+                  'name': product['name'],
+                  'list_price': product['price']
+              })
+      else:
+          _logger.error("Failed to fetch product data from external API")
+    </code></pre>
+
+    <div class="section-title">3. Wizards: Creating Dynamic Wizards and Multi-Step Forms</div>
+    <p>Wizards ek special type ka UI hote hain jo users ko step-by-step process ke through guide karte hain. Inko
+      dynamic forms, pop-ups, aur multi-step processes ke liye use kiya jaata hai. Yeh complex tasks ko simplify karne
+      ke liye useful hote hain.</p>
+
+    <div class="subsection-title">Use Case:</div>
+    <p>Maan lijiye aapko ek wizard banani hai jisme user ek report generate karne ke liye pehle customer select kare,
+      fir report ka time range select kare, aur fir report generate ho.</p>
+
+    <div class="subsection-title">Steps:</div>
+    <ul>
+      <li><strong>Create a Transient Model:</strong> Yeh model temporary data ko store karta hai.</li>
+      <li><strong>Add Fields for Input:</strong> User ke input ke liye fields define karte hain.</li>
+      <li><strong>Action Handling:</strong> Wizard ke action ko handle karte hain (jaise form submission).</li>
+    </ul>
+
+    <div class="subsection-title">Code Example:</div>
+    <pre><code class="language-python">
+class ReportGenerationWizard(models.TransientModel):
+  _name = 'report.generation.wizard'
+
+  customer_id = fields.Many2one('res.partner', 'Customer')
+  start_date = fields.Date('Start Date')
+  end_date = fields.Date('End Date')
+
+  def action_generate_report(self):
+      # Selected customer aur date range ko use karke report generate karte hain
+      report_data = self.env['sale.order'].search([
+          ('partner_id', '=', self.customer_id.id),
+          ('date_order', '&gt;=', self.start_date),
+          ('date_order', '&lt;=', self.end_date)
+      ])
+      
+      # Report data ko return karna ya save karna
+      return self.env.ref('my_module.report_template').report_action(report_data)
+    </code></pre>
+
+    <div class="section-title">4. Scheduled Actions: Cron Jobs and Server Actions</div>
+    <p>Scheduled Actions (ya cron jobs) Odoo mein scheduled tasks ko run karne ke liye use kiye jaate hain. Yeh tasks
+      kisi specific time interval pe run hote hain, jaise har din, week, ya month.</p>
+
+    <div class="subsection-title">Use Case:</div>
+    <p>Aapko inventory ko daily update karna hai, jaise stock levels ko check karna aur restock alerts bhejna.</p>
+
+    <div class="subsection-title">Steps:</div>
+    <ul>
+      <li><strong>Define Cron Job:</strong> Odoo mein cron job ko define karte hain jo specific time pe execute ho.</li>
+      <li><strong>Action to be Performed:</strong> Cron job ko jo action perform karna hai, woh define karte hain.</li>
+    </ul>
+
+    <div class="subsection-title">XML Example: Creating Cron Job for Daily Task</div>
+    <pre><code class="language-xml">
+&lt;odoo&gt;
+  &lt;record id="ir_cron_inventory_update" model="ir.cron"&gt;
+      &lt;field name="name"&gt;Daily Inventory Update&lt;/field&gt;
+      &lt;field name="model_id" ref="model_stock_picking"/&gt;
+      &lt;field name="state"&gt;code&lt;/field&gt;
+      &lt;field name="code"&gt;model.update_inventory()&lt;/field&gt;
+      &lt;field name="interval_number"&gt;1&lt;/field&gt;
+      &lt;field name="interval_type"&gt;days&lt;/field&gt;
+      &lt;field name="numbercall"&gt;-1&lt;/field&gt; &lt;!-- Infinite times --&gt;
+  &lt;/record&gt;
+&lt;/odoo&gt;
+    </code></pre>
+
+    <div class="subsection-title">Python Example: Method to Update Inventory</div>
+    <pre><code class="language-python">
+class StockPicking(models.Model):
+  _inherit = 'stock.picking'
+  
+  def update_inventory(self):
+      # Stock ko update karne ka logic
+      stock_quant = self.env['stock.quant'].search([])
+      for quant in stock_quant:
+          # Stock update logic here
+          quant.write({'quantity': quant.quantity + 10})
+    </code></pre>
+
+    <div class="section-title">5. Custom Reports: PDF Reports Using QWeb and wkhtmltopdf</div>
+    <p>Odoo mein QWeb ka use karke custom reports generate kar sakte hain. Yeh reports PDF format mein convert hote hain
+      using wkhtml
+      topdf. Yeh reports specially business data ko professional format mein present karne ke liye useful hote hain. Aap
+      Odoo mein custom templates banake, usse customized reports generate kar sakte hain.</p>
+
+    <div class="subsection-title">Use Case:</div>
+    <p>Aapko ek sales report generate karni hai jo customer, product, quantity aur total sales ko show kare.</p>
+
+    <div class="subsection-title">Steps:</div>
+    <ul>
+      <li><strong>Create a QWeb Template:</strong> Report ka layout design karte hain using QWeb templates.</li>
+      <li><strong>Define Report Action:</strong> Report ko generate karne ka action define karte hain.</li>
+      <li><strong>Attach Report to Action:</strong> Report ko ek specific action ke saath link karte hain, jaise 'Print'
+        button click karna.</li>
+    </ul>
+
+    <div class="subsection-title">Code Example: QWeb Template for Sales Report</div>
+    <pre><code class="language-xml">
+&lt;template id="report_sales_template"&gt;
+    &lt;t t-call="web.html_container"&gt;
+        &lt;div class="page"&gt;
+            &lt;h2&gt;Sales Report&lt;/h2&gt;
+            &lt;table&gt;
+                &lt;thead&gt;
+                    &lt;tr&gt;
+                        &lt;th&gt;Customer&lt;/th&gt;
+                        &lt;th&gt;Product&lt;/th&gt;
+                        &lt;th&gt;Quantity&lt;/th&gt;
+                        &lt;th&gt;Total&lt;/th&gt;
+                    &lt;/tr&gt;
+                &lt;/thead&gt;
+                &lt;tbody&gt;
+                    &lt;t t-foreach="doc.sale_order_ids" t-as="order"&gt;
+                        &lt;tr&gt;
+                            &lt;td&gt;<span t-field="order.partner_id.name"/>&lt;/td&gt;
+                            &lt;td&gt;<span t-field="order.product_id.name"/>&lt;/td&gt;
+                            &lt;td&gt;<span t-field="order.product_qty"/>&lt;/td&gt;
+                            &lt;td&gt;<span t-field="order.total_price"/>&lt;/td&gt;
+                        &lt;/tr&gt;
+                    &lt;/t&gt;
+                &lt;/tbody&gt;
+            &lt;/table&gt;
+        &lt;/div&gt;
+    &lt;/t&gt;
+</code></pre>
+
+    <div class="subsection-title">Report Action: Linking to QWeb Template</div>
+    <pre><code class="language-xml">
+&lt;record id="action_report_sales" model="ir.actions.report"&gt;
+    &lt;field name="name"&gt;Sales Report&lt;/field&gt;
+    &lt;field name="model"&gt;sale.order&lt;/field&gt;
+    &lt;field name="report_type"&gt;qweb-pdf&lt;/field&gt;
+    &lt;field name="report_name"&gt;your_module.report_sales_template&lt;/field&gt;
+    &lt;field name="report_file"&gt;sales_report&lt;/field&gt;
+    &lt;field name="attachment"&gt;False&lt;/field&gt;
+&lt;/record&gt;
+</code></pre>
+
+    <div class="subsection-title">Python Code for Calling Report</div>
+    <pre><code class="language-python">
+class SaleOrder(models.Model):
+    _inherit = 'sale.order'
+
+    def print_sales_report(self):
+        return self.env.ref('your_module.action_report_sales').report_action(self)
+      </code></pre>
+
+    <p>Yeh steps aapko customized reports generate karne mein madad karenge, jo aapke business requirements ke according
+      customize kiye gaye honge.</p>
+
+    <h1>Conclusion</h1>
+    <p>Odoo development ek flexible aur scalable framework provide karta hai jo businesses ke complex processes ko
+      simplify karta hai. Aap APIs, wizards, scheduled actions, aur custom reports ke zariye apne Odoo system ko fully
+      customize kar sakte hain aur better performance aur automation achieve kar sakte hain. Yeh guide aapko Odoo mein
+      advanced development ke concepts ko samajhne mein madad karegi, jo aapke projects ko successful banane mein
+      crucial honge.</p>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="content" style="background-color: #fe8c8c6f;">
+    <h1>6. Database and ORM in Odoo (Detailed Explanation)</h1>
+    <p>
+      Odoo ka ORM (Object-Relational Mapping) system ek powerful abstraction hai, jo Python objects ko SQL databases ke
+      tables ke saath map karta hai. Odoo mein PostgreSQL ka use hota hai jo database management system hai. Yeh system
+      aapko apne data ko efficiently manage karne ki suvidha deta hai. Aap ORM ke through data access karte hain bina
+      SQL queries likhe, lekin aapko complex queries aur performance optimization ke liye direct SQL queries bhi likhne
+      ki zarurat pad sakti hai.
+    </p>
+
+    <h2 class="section-title">1. PostgreSQL Basics</h2>
+    <p>
+      PostgreSQL ek open-source, object-relational database management system (DBMS) hai. Odoo mein PostgreSQL ko as a
+      default database system use kiya jata hai. Odoo ka ORM iske upar kaam karta hai, jisse aapko direct SQL queries
+      likhne ki zarurat nahi padti, lekin agar aapko complex operations perform karne ho to aap SQL queries bhi likh
+      sakte hain.
+    </p>
+
+    <h3 class="subsection-title">Database Creation and Backup</h3>
+    <p>
+      Odoo installation ke baad ek database create hota hai. Agar aapko apne Odoo instance mein naya database create
+      karna ho, toh PostgreSQL ka <code>CREATE DATABASE</code> command use karke aap naya database bana sakte hain.
+    </p>
+
+    <div class="highlight">
+      <h4>Database Creation</h4>
+      <pre><code class="language-bash">
+  # PostgreSQL CLI se login karna
+  psql -U postgres
+  
+  # Naya database create karna
+  CREATE DATABASE odoo_db;
+  
+  # User ko database ke saath permissions dena
+  GRANT ALL PRIVILEGES ON DATABASE odoo_db TO odoo_user;
+      </code></pre>
+      <p>
+        Ismein <code>odoo_db</code> aapka database hai aur <code>odoo_user</code> woh user hai jisko aapne permissions
+        diye hain.
+      </p>
+    </div>
+
+    <h3 class="subsection-title">Database Backup</h3>
+    <p>
+      Aap PostgreSQL ke <code>pg_dump</code> tool ka use karke apne Odoo database ka backup le sakte hain.
+    </p>
+
+    <div class="highlight">
+      <h4>Database Backup Example</h4>
+      <pre><code class="language-bash">
+  # Database ka backup lena
+  pg_dump -U odoo_user odoo_db &gt; odoo_db_backup.sql
+      </code></pre>
+      <p>
+        Is command se <code>odoo_db</code> ka backup <code>odoo_db_backup.sql</code> file mein save ho jayega.
+      </p>
+    </div>
+
+    <p>
+      Agar aapko backup restore karna ho, toh aap <code>psql</code> command ka use kar sakte hain:
+    </p>
+
+    <div class="highlight">
+      <pre><code class="language-bash">
+  psql -U odoo_user odoo_db &lt; odoo_db_backup.sql
+      </code></pre>
+    </div>
+
+    <h2 class="section-title">Queries and Indexing</h2>
+    <p>
+      PostgreSQL mein queries run karte waqt, indexing ka use karna performance ko kaafi enhance kar sakta hai,
+      especially jab aap large datasets ke saath kaam kar rahe ho.
+    </p>
+
+    <h3 class="subsection-title">Queries</h3>
+    <p>
+      Odoo mein aap ORM methods ka use karke queries execute karte hain, jaise <code>search()</code>,
+      <code>write()</code>, aur <code>create()</code>. Lekin agar aapko complex queries likhni ho, toh direct SQL
+      queries bhi likh sakte hain.
+    </p>
+
+    <div class="highlight">
+      <h4>SQL Query Example in PostgreSQL</h4>
+      <pre><code class="language-sql">
+  SELECT name, age FROM my_model WHERE age &gt; 30;
+      </code></pre>
+      <p>
+        Is query se aap <code>my_model</code> table se un records ko fetch karenge jinka age 30 se zyada hai.
+      </p>
+    </div>
+
+    <h3 class="subsection-title">Indexing</h3>
+    <p>
+      Indexing ka use aap queries ko fast banane ke liye karte hain. Jab aap large datasets se kaam karte hain, indexing
+      se queries ka execution time kam hota hai.
+    </p>
+
+    <div class="highlight">
+      <h4>Creating Index Example</h4>
+      <pre><code class="language-sql">
+  CREATE INDEX index_name ON my_model (age);
+      </code></pre>
+      <p>
+        Is index se <code>age</code> column par queries ka execution fast ho jayega.
+      </p>
+    </div>
+
+    <h2 class="section-title">2. Advanced ORM in Odoo</h2>
+    <p>
+      Odoo ka ORM (Object-Relational Mapping) aapko database records ko Python objects ke roop mein handle karne ki
+      suvidha deta hai. ORM ko samajhna aur use karna Odoo development ka ek important aspect hai.
+    </p>
+
+    <h3 class="subsection-title">SQL Queries in Odoo (Direct SQL Queries)</h3>
+    <p>
+      Odoo mein, by default aap ORM methods ka use karte hain, lekin jab aapko complex operations perform karne ho, toh
+      direct SQL queries ka use kar sakte hain. Aap SQL queries ko execute karne ke liye <code>env.cr.execute()</code>
+      method ka use karte hain.
+    </p>
+
+    <div class="highlight">
+      <h4>Executing SQL Queries in Odoo</h4>
+      <pre><code class="language-python">
+  class MyModel(models.Model):
+      _name = 'my.model'
+  
+      def execute_sql_query(self):
+          # Direct SQL query ko execute karte hain
+          self.env.cr.execute("SELECT name, age FROM my_model WHERE age &gt; %s", (30,))
+  
+          # Result fetch karna
+          result = self.env.cr.fetchall()
+  
+          return result
+      </code></pre>
+      <p>
+        Is example mein, <code>env.cr.execute()</code> method SQL query ko execute karta hai aur <code>fetchall()</code>
+        method query ke result ko fetch karne ka kaam karta hai.
+      </p>
+    </div>
+
+    <h3 class="subsection-title">ORM Methods in Odoo</h3>
+    <p>
+      Odoo ka ORM aapko database records ko create, read, update, aur delete (CRUD operations) karne ki suvidha deta
+      hai. Kuch important ORM methods hain:
+    </p>
+
+    <div class="highlight">
+      <h4>Create Method</h4>
+      <pre><code class="language-python">
+  new_record = self.env['my.model'].create({
+      'name': 'John',
+      'age': 30
+  })
+      </code></pre>
+      <p>
+        Yeh method naya record create karne ke liye use hota hai.
+      </p>
+    </div>
+
+    <div class="highlight">
+      <h4>Search Method</h4>
+      <pre><code class="language-python">
+  records = self.env['my.model'].search([('age', '&gt;', 30)])
+      </code></pre>
+      <p>
+        Yeh method existing records ko search karne ke liye use hota hai.
+      </p>
+    </div>
+
+    <div class="highlight">
+      <h4>Write Method</h4>
+      <pre><code class="language-python">
+  record = self.env['my.model'].browse(1)  # ID = 1
+  record.write({'age': 35})
+      </code></pre>
+      <p>
+        Yeh method existing records ko update karne ke liye use hota hai.
+      </p>
+    </div>
+
+    <div class="highlight">
+      <h4>Unlink Method</h4>
+      <pre><code class="language-python">
+  record = self.env['my.model'].browse(1)
+  record.unlink()  # ID = 1
+      </code></pre>
+      <p>
+        Yeh method records ko delete karne ke liye use hota hai.
+      </p>
+    </div>
+
+    <h2 class="section-title">Performance Optimization with ORM</h2>
+    <p>
+      Odoo ORM ko optimize karna bahut zaroori hai, especially jab aap large datasets ke saath kaam karte hain. Kuch
+      techniques hain jo aap ORM ke performance ko optimize karne ke liye use kar sakte hain:
+    </p>
+
+    <div class="highlight">
+      <h4>Using fields parameter in search() and read()</h4>
+      <pre><code class="language-python">
+  records = self.env['my.model'].search([], fields=['name', 'age'])
+      </code></pre>
+      <p>
+        Jab aap sirf kuch specific fields ki zaroorat ho, toh aap <code>fields</code> parameter ka use karke query ko
+        optimize kar sakte hain. Isse unnecessary data load nahi hota, jo performance ko improve karta hai.
+      </p>
+    </div>
+
+    <div class="highlight">
+      <h4>Batch Operations</h4>
+      <p>
+        Agar aapko bohot saare records update ya delete karne hain, toh aap batch operations ka use kar sakte hain. Isse
+        multiple operations ko ek saath execute karke performance improve hota hai.
+      </p>
+      <pre><code class="language-python">
+records = self.env['my.model'].browse([1, 2, 3])  # List of records
+records.write({'age': 40})  # Update all records at once
+    </code></pre>
+    </div>
+
+    <h2 class="section-title">3. Odoo Advanced Features</h2>
+    <p>
+      Odoo ka ORM ke alawa aur bhi kai advanced features hain jo aapko apne Odoo apps ko efficient aur flexible banane
+      mein madad karte hain. Yeh features aapke development ko streamline karte hain aur aapke applications ko zyada
+      powerful banate hain.
+    </p>
+
+    <h3 class="subsection-title">Automated Actions</h3>
+    <p>
+      Odoo mein automated actions ka use karke aap workflows aur actions automate kar sakte hain. Yeh actions aap
+      specific conditions ke under run kar sakte hain, jese ki record create hone par, update hone par, ya specific time
+      interval par.
+    </p>
+
+    <div class="highlight">
+      <h4>Automated Action Example</h4>
+      <pre><code class="language-python">
+# Automated action that runs on record creation
+class MyModel(models.Model):
+    _name = 'my.model'
+
+    def _run_automated_action(self):
+        if self.env['my.model'].search_count([('name', '=', 'John')]) == 0:
+            self.env['my.model'].create({
+                'name': 'John',
+                'age': 30
+            })
+    </code></pre>
+      <p>
+        Is example mein, automated action jab record create hota hai, toh <code>_run_automated_action()</code> method
+        call hota hai aur agar 'John' naam ka record nahi hota, toh naya record create hota hai.
+      </p>
+    </div>
+
+    <h3 class="subsection-title">Scheduled Actions (Cron Jobs)</h3>
+    <p>
+      Odoo mein cron jobs ka use aap repetitive tasks ko automate karne ke liye karte hain. Aap cron jobs ko specific
+      intervals par run karne ke liye schedule kar sakte hain.
+    </p>
+
+    <div class="highlight">
+      <h4>Creating a Cron Job</h4>
+      <pre><code class="language-python">
+class MyCronJob(models.Model):
+    _name = 'my.cron.job'
+
+    def _run_cron_job(self):
+        # Task to be executed by cron job
+        print("Cron job is running")
+
+    def _schedule_cron_job(self):
+        # Scheduling cron job
+        self.env['ir.cron'].create({
+            'name': 'My Cron Job',
+            'model_id': self.env.ref('model_my_cron_job').id,
+            'state': 'code',
+            'code': 'model._run_cron_job()',
+            'interval_number': 1,  # interval in minutes
+            'interval_type': 'minutes',
+            'nextcall': fields.Datetime.now(),
+        })
+    </code></pre>
+      <p>
+        Is code mein, humne ek cron job banaya hai jo ek minute ke interval par run hota hai aur task execute karta hai.
+      </p>
+    </div>
+
+    <h2 class="section-title">4. Reporting in Odoo</h2>
+    <p>
+      Odoo ka reporting system aapko custom reports banane ki suvidha deta hai jo aapke business processes ko monitor
+      aur analyze karne mein madad karte hain. Aap QWeb, Excel aur PDF reports generate kar sakte hain.
+    </p>
+
+    <h3 class="subsection-title">QWeb Reports</h3>
+    <p>
+      QWeb reporting Odoo ka default templating engine hai. Aap QWeb reports ko create kar sakte hain jo HTML templates
+      ke format mein hote hain. Yeh reports PDF ya HTML format mein generate kiye ja sakte hain.
+    </p>
+
+    <div class="highlight">
+      <h4>QWeb Report Example</h4>
+      <pre><code class="language-xml">
+<template id="report_my_model">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="doc">
+            <div>
+                <h2><t t-esc="doc.name"/></h2>
+                <p><t t-esc="doc.age"/></p>
+            </div>
+        </t>
+    </t>
+</template>
+    </code></pre>
+      <p>
+        Yeh ek basic QWeb report hai jo <code>my.model</code> records ka naam aur age show karta hai.
+      </p>
+    </div>
+
+    <h2 class="section-title">Conclusion</h2>
+    <p>
+      Odoo ka ORM aur PostgreSQL ka use karna aapko apne business applications ko efficiently manage karne ka mauka deta
+      hai. Aap ORM methods ke through data access kar sakte hain, aur complex queries ke liye direct SQL queries bhi
+      likh sakte hain. Yeh system large datasets aur high-performance operations ke liye bhi suitable hai. Odoo ke
+      advanced features, jaise automated actions aur cron jobs, aapko apne workflows ko automate karne ki suvidha dete
+      hain.
+    </p>
+    <p>
+      Odoo ka ORM system bahut flexible aur powerful hai, jise aap apne specific business requirements ke hisaab se
+      customize kar sakte hain. Is course ke zariye aapne Odoo ke ORM, database management aur reporting ke advanced
+      aspects ko seekha, jo aapko apne Odoo projects mein madad karenge.
+    </p>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="content">
+    <h1>7. Website Development in Odoo (Detailed Explanation)</h1>
+    <p>Odoo mein website development kaafi versatile aur flexible hai. Aap easily custom website pages, modules,
+      snippets, SEO optimization, aur eCommerce features develop kar sakte hain. Odoo mein in sab tasks ko accomplish
+      karne ke liye aapko HTML, CSS, JavaScript, Odoo's QWeb templating engine, aur Odoo's website builder tools ka use
+      karna padta hai.</p>
+    <p>Chaliye, iske har aspect ko deeply samajhte hain.</p>
+
+    <div class="section-title">1. Creating Custom Website Pages and Modules</div>
+    <p>Odoo mein aap apne custom website pages bana sakte hain jo aapke business ki requirements ke hisaab se ho. Custom
+      modules bhi banaye ja sakte hain jise website pe specific functionality add kiya ja sake.</p>
+
+    <div class="subsection-title">Custom Website Page Creation:</div>
+    <p>Yahan hum ek simple custom page create karenge jo h1 tag aur p tag ka use karega.</p>
+
+    <div class="highlight">
+      <pre><code class="language-xml">
+&lt;odoo&gt;
+    &lt;!-- Ye template define karta hai jo website page pe dikhai dega --&gt;
+    &lt;template id="custom_website_page" name="Custom Page"&gt;
+        &lt;!-- Ye heading website page pe display karega --&gt;
+        &lt;h1&gt;Welcome to My Custom Website Page&lt;/h1&gt;
+        &lt;!-- Ye paragraph content ko show karega --&gt;
+        &lt;p&gt;This is a custom page created in Odoo&lt;/p&gt;
+    &lt;/template&gt;
+&lt;/odoo&gt;
+      </code></pre>
+    </div>
+
+    <p>Explanation:</p>
+    <ul>
+      <li>template tag ke andar humne ek custom page define kiya hai.</li>
+      <li>id attribute mein, hum template ka unique identifier de rahe hain.</li>
+      <li>name attribute mein hum page ka naam define kar rahe hain.</li>
+      <li>h1 tag title ko display karta hai, aur p tag page content ko show karta hai.</li>
+    </ul>
+
+    <div class="subsection-title">Creating a Custom Module for Website:</div>
+    <p>Agar aapko specific business functionality chahiye, toh aap custom module create kar sakte hain. Yahan ek example
+      diya gaya hai.</p>
+
+    <div class="highlight">
+      <pre><code class="language-python">
+my_website_module/
+├── controllers/
+│   └── main.py
+├── views/
+│   └── website_templates.xml
+├── __manifest__.py
+└── __init__.py
+      </code></pre>
+    </div>
+
+    <div class="subsection-title">Manifest File (__manifest__.py):</div>
+    <div class="highlight">
+      <pre><code class="language-python">
+{
+    'name': 'My Custom Website Module',
+    'version': '1.0',
+    'category': 'Website',
+    'depends': ['website'],
+    'data': ['views/website_templates.xml'],
+    'application': True,
+}
+      </code></pre>
+    </div>
+    <p>Explanation:</p>
+    <ul>
+      <li>depends: Ismein hum batate hain ki hamare module ko kis dusre module pe depend hona hai, is case mein
+        'website'.</li>
+      <li>data: Ismein hum wo files include karte hain jo hamare module ka UI define karti hain (yaha XML file).</li>
+    </ul>
+
+    <div class="subsection-title">Controller Code (controllers/main.py):</div>
+    <div class="highlight">
+      <pre><code class="language-python">
+from odoo import http
+from odoo.http import request
+
+class CustomWebsiteController(http.Controller):
+    @http.route('/custom-page', auth='public', website=True)
+    def custom_page(self):
+        return request.render('my_website_module.custom_website_page')
+      </code></pre>
+    </div>
+    <p>Explanation:</p>
+    <ul>
+      <li>@http.route: Yeh decorator Odoo ko batata hai ki kis URL ke liye kaunsa function execute hoga.</li>
+      <li>request.render: Yeh function Odoo ko batata hai ki kaunsa template render kiya jana chahiye.</li>
+    </ul>
+
+    <div class="subsection-title">View Template (views/website_templates.xml):</div>
+    <div class="highlight">
+      <pre><code class="language-xml">
+&lt;odoo&gt;
+    &lt;template id="custom_website_page" name="Custom Page"&gt;
+        &lt;!-- Ye heading display karega --&gt;
+        &lt;h1&gt;Welcome to My Custom Page&lt;/h1&gt;
+        &lt;!-- Ye paragraph display karega --&gt;
+        &lt;p&gt;This page is rendered from a custom module&lt;/p&gt;
+    &lt;/template&gt;
+&lt;/odoo&gt;
+      </code></pre>
+    </div>
+
+    <p>Explanation:</p>
+    <ul>
+      <li>id="custom_website_page": Yeh template ka unique identifier hai.</li>
+      <li>name="Custom Page": Yeh template ka naam hai jo hum backend mein dekh sakte hain.</li>
+    </ul>
+
+    <div class="section-title">2. Snippet Creation:</div>
+    <p>Odoo mein snippets reusable components hote hain jo aap apne website pages mein drag-and-drop kar sakte hain.</p>
+
+    <div class="highlight">
+      <pre><code class="language-xml">
+&lt;odoo&gt;
+    &lt;!-- Snippet ka template create kar rahe hain --&gt;
+    &lt;template id="custom_snippet" name="Custom Snippet" inherit_id="website.snippets.section"&gt;
+        &lt;!-- XPath ka use kar ke existing snippet section ko extend kar rahe hain --&gt;
+        &lt;xpath expr="//div[@id='snippet']" position="inside"&gt;
+            &lt;div class="custom-snippet"&gt;
+                &lt;h2&gt;Custom Snippet Title&lt;/h2&gt;
+                &lt;p&gt;This is a custom snippet&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/xpath&gt;
+    &lt;/template&gt;
+&lt;/odoo&gt;
+      </code></pre>
+    </div>
+
+    <p>Explanation:</p>
+    <ul>
+      <li>inherit_id="website.snippets.section": Yeh Odoo ko batata hai ki hum ek existing snippet ko extend kar rahe
+        hain.</li>
+      <li>xpath: Yeh Odoo ko batata hai ki kis location par content insert karna hai.</li>
+    </ul>
+
+    <div class="section-title">3. SEO Optimization in Odoo Websites:</div>
+    <p>Odoo mein SEO optimization kaafi asaan hai. Aap meta tags, descriptions, aur keywords ko customize kar sakte hain
+      taaki search engines aapki website ko achhe se index kar sakein.</p>
+
+    <div class="highlight">
+      <pre><code class="language-xml">
+&lt;odoo&gt;
+    &lt;template id="custom_website_page" name="Custom Page"&gt;
+        &lt;!-- Meta description tag for SEO optimization --&gt;
+        &lt;meta name="description" content="Custom Page for SEO optimization in Odoo"/&gt;
+        &lt;meta name="keywords" content="Odoo, Custom Page, SEO"/&gt;
+        &lt;h1&gt;Welcome to My Custom SEO Optimized Page&lt;/h1&gt;
+    &lt;/template&gt;
+&lt;/odoo&gt;
+      </code></pre>
+    </div>
+
+    <p>Explanation:</p>
+    <ul>
+      <li>meta name="description": Yeh tag aapki website ka description set karta hai.</li>
+      <li>meta name="keywords": Yeh tag website ke keywords set karta hai jo search engine optimization ke liye use hota
+        hai.</li>
+    </ul>
+
+    <div class="section-title">4. eCommerce Customization:</div>
+    <p>Odoo mein eCommerce module ko aap customize kar sakte hain taaki aap apne products, cart, checkout aur payment
+      process ko apne business needs ke hisaab se modify kar sakein.</p>
+
+    <div class="highlight">
+      <pre><code class="language-xml">
+&lt;odoo&gt;
+    &lt;template id="product_custom_fields" inherit_id="website_sale.product"&gt;
+        &lt;xpath expr="//div[@class='oe_price']" position="after"&gt;
+            &lt;div class="custom-product-field"&gt;
+                &lt;p&gt;Custom Field: &lt;span t-field="product.custom_field"/&gt;&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/xpath&gt;
+    &lt;/template&gt;
+&lt;/odoo&gt;
+      </code></pre>
+    </div>
+
+    <p>Explanation:</p>
+    <ul>
+      <li>inherit_id="website_sale.product": Yeh inherit karta hai existing product template ko.</li>
+      <li>t-field="product.custom_field": Yeh custom field ko display karta hai jo aapke product data mein ho sakta hai.
+      </li>
+    </ul>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="content" style="background-color: #9399ff6b;">
+    <h1>8. Accounting Setup in Odoo</h1>
+    <p>Odoo mein accounting setup karna kaafi zaroori hota hai, especially jab aapko financial records manage karna ho.
+      Odoo mein journals, taxes, aur financial reports ke through aap apne business ki accounting manage kar sakte hain.
+    </p>
+
+    <div class="section-title">Journals:</div>
+    <p>Journals accounting ke documents hote hain jisme transactions record kiye jaate hain.</p>
+    <p class="highlight">Example - Creating a Journal in Odoo:</p>
+    <pre><code class="language-xml">&lt;odoo&gt;
+      &lt;!-- Journal create karne ka example --&gt;
+      &lt;record id="account_journal_sale" model="account.journal"&gt;
+          &lt;field name="name"&gt;Sales Journal&lt;/field&gt;  &lt;!-- Journal ka naam --&gt;
+          &lt;field name="code"&gt;SALE&lt;/field&gt;  &lt;!-- Journal ka code --&gt;
+          &lt;field name="type"&gt;sale&lt;/field&gt;  &lt;!-- Journal ka type, yeh sale ka journal hoga --&gt;
+          &lt;field name="company_id" ref="base.main_company"/&gt;  &lt;!-- Company ke liye journal define karte hain --&gt;
+      &lt;/record&gt;
+      &lt;/odoo&gt;</code></pre>
+    <p><strong>Explanation:</strong></p>
+    <ul>
+      <li><code>account.journal</code>: Yeh model Odoo mein journals ko represent karta hai.</li>
+      <li><code>name</code>: Journal ka naam.</li>
+      <li><code>code</code>: Journal ka unique code.</li>
+      <li><code>type</code>: Journal ka type, yeh "sale", "purchase", ya "cash" ho sakta hai.</li>
+    </ul>
+
+    <div class="section-title">Taxes:</div>
+    <p>Odoo mein taxes ko define karna aur apply karna bhi simple hai. Aap different tax rates aur rules define kar
+      sakte hain jo aapke sales ya purchases pe apply honge.</p>
+    <p class="highlight">Example - Creating a Tax:</p>
+    <pre><code class="language-xml">&lt;odoo&gt;
+      &lt;!-- Sales tax create karne ka example --&gt;
+      &lt;record id="account_tax_sale" model="account.tax"&gt;
+          &lt;field name="name"&gt;Sales Tax 18%&lt;/field&gt;  &lt;!-- Tax ka naam --&gt;
+          &lt;field name="amount_type"&gt;percent&lt;/field&gt;  &lt;!-- Yeh percentage mein hoga --&gt;
+          &lt;field name="amount"&gt;18.0&lt;/field&gt;  &lt;!-- Tax rate 18% --&gt;
+          &lt;field name="type_tax_use"&gt;sale&lt;/field&gt;  &lt;!-- Yeh sale transactions ke liye apply hoga --&gt;
+      &lt;/record&gt;
+      &lt;/odoo&gt;</code></pre>
+    <p><strong>Explanation:</strong></p>
+    <ul>
+      <li><code>account.tax</code>: Yeh model Odoo mein taxes ko represent karta hai.</li>
+      <li><code>amount_type</code>: Yeh percentage tax rate ko define karta hai.</li>
+      <li><code>amount</code>: Yeh actual tax rate ko define karta hai.</li>
+    </ul>
+
+    <div class="section-title">Financial Reports:</div>
+    <p>Odoo mein aapko financial reports generate karne ki facility milti hai, jaise Profit & Loss, Balance Sheet, Cash
+      Flow, etc.</p>
+    <p class="highlight">Example - Customizing Financial Reports:</p>
+    <pre><code class="language-xml">&lt;odoo&gt;
+      &lt;template id="custom_financial_report" name="Custom Financial Report"&gt;
+          &lt;!-- Custom financial report ko render karne ke liye template --&gt;
+          &lt;h1&gt;Financial Report&lt;/h1&gt;
+          &lt;table&gt;
+              &lt;tr&gt;
+                  &lt;th&gt;Account&lt;/th&gt;
+                  &lt;th&gt;Debit&lt;/th&gt;
+                  &lt;th&gt;Credit&lt;/th&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                  &lt;td&gt;Sales&lt;/td&gt;
+                  &lt;td&gt;1000&lt;/td&gt;
+                  &lt;td&gt;0&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                  &lt;td&gt;Expenses&lt;/td&gt;
+                  &lt;td&gt;0&lt;/td&gt;
+                  &lt;td&gt;500&lt;/td&gt;
+              &lt;/tr&gt;
+          &lt;/table&gt;
+      &lt;/template&gt;
+      &lt;/odoo&gt;</code></pre>
+    <p><strong>Explanation:</strong></p>
+    <ul>
+      <li>Yahan humne ek custom financial report banaya hai jo accounts aur debit/credit balances show karega.</li>
+    </ul>
+
+    <div class="section-title">2. Multi-Currency Management in Odoo</div>
+    <p>Agar aap international transactions karte hain, toh multi-currency management zaroori hota hai. Odoo mein aap
+      easily multiple currencies manage kar sakte hain aur exchange rates ko automatically update kar sakte hain.</p>
+    <div class="subsection-title">Setting up Multi-Currency:</div>
+    <p class="highlight">Example - Activating Multi-Currency:</p>
+    <pre><code class="language-xml">&lt;odoo&gt;
+      &lt;!-- Currency configuration ka example --&gt;
+      &lt;record id="currency_usd" model="res.currency"&gt;
+          &lt;field name="name"&gt;USD&lt;/field&gt;  &lt;!-- Currency ka naam --&gt;
+          &lt;field name="symbol"&gt;USD&lt;/field&gt;  &lt;!-- Currency symbol --&gt;
+          &lt;field name="rate" eval="1.0"/&gt;  &lt;!-- Initial exchange rate --&gt;
+          &lt;field name="active" eval="True"/&gt;  &lt;!-- Currency active hai --&gt;
+      &lt;/record&gt;
+      &lt;/odoo&gt;</code></pre>
+    <p><strong>Explanation:</strong></p>
+    <ul>
+      <li><code>res.currency</code>: Yeh model currencies ko represent karta hai.</li>
+      <li><code>name</code>: Currency ka name (jaise USD).</li>
+      <li><code>symbol</code>: Currency ka symbol.</li>
+      <li><code>rate</code>: Currency ka exchange rate.</li>
+    </ul>
+
+    <div class="subsection-title">Managing Exchange Rates:</div>
+    <p>Odoo automatically exchange rates ko manage kar sakta hai, ya aap manually update kar sakte hain.</p>
+    <p class="highlight">Example - Updating Exchange Rates:</p>
+    <pre><code class="language-python"># Python code to update currency exchange rates programmatically
+      from odoo import models, fields
+  
+      class UpdateCurrencyRates(models.Model):
+          _name = 'currency.update'
+          
+          def update_exchange_rate(self):
+              # Currency update logic
+              usd_currency = self.env['res.currency'].search([('name', '=', 'USD')])
+              usd_currency.write({'rate': 75.5})  # Update exchange rate for USD</code></pre>
+    <p><strong>Explanation:</strong></p>
+    <ul>
+      <li><code>search()</code>: Yeh method specific record ko search karta hai.</li>
+      <li><code>write()</code>: Yeh method record ko update karta hai.</li>
+    </ul>
+
+    <div class="section-title">3. Localization and Translations in Odoo</div>
+    <p>Odoo mein localization ka matlab hai apne system ko local market ke hisaab se customize karna. Yeh alag-alag
+      regions aur languages ke liye zaroori hota hai. Translation tools ke through aap apne system ko multiple languages
+      mein translate kar sakte hain.</p>
+
+    <div class="subsection-title">Importing/Exporting Language Files:</div>
+    <p>Aap Odoo mein language files ko import ya export kar sakte hain taaki aap system ko different languages mein
+      setup kar sakein.</p>
+    <p class="highlight">Exporting Language File:</p>
+    <pre><code class="language-xml">Settings &gt; Translations &gt; Export Translation.</code></pre>
+    <p>Yahan se aap specific language file ko export kar sakte hain jo aapke system ki translations ko contain karti
+      hai.</p>
+    <p class="highlight">Importing Language File:</p>
+    <pre><code class="language-xml">Settings &gt; Translations &gt; Import Translation.</code></pre>
+    <p>Is step se aap export ki gayi language file ko import kar sakte hain, jo Odoo ke interface ko selected language
+      mein convert kar dega.</p>
+
+    <div class="subsection-title">Creating Custom Translations:</div>
+    <p>Agar aap apni custom modules mein translations chahte hain, toh aapko ek translation file banani hogi jisme
+      custom strings ko translate kiya jaaye. Yeh file .po format mein hoti hai.</p>
+    <p class="highlight">Example - Creating a Custom Translation for a Module:</p>
+    <pre><code class="language-xml">&lt;odoo&gt;
+      &lt;record id="module_name" model="ir.translation"&gt;
+          &lt;field name="name"&gt;Custom Module Translation&lt;/field&gt;
+          &lt;field name="lang"&gt;en&lt;/field&gt;  &lt;!-- Language code --&gt;
+          &lt;field name="value"&gt;Translated String&lt;/field&gt;
+      &lt;/record&gt;
+      &lt;/odoo&gt;</code></pre>
+    <p><strong>Explanation:</strong></p>
+    <ul>
+      <li><code>ir.translation</code>: Yeh model translation records ko represent karta hai.</li>
+      <li><code>lang</code>: Yeh field selected language ko represent karta hai (jaise 'en' for English).</li>
+      <li><code>value</code>: Yeh field translated string ko represent karta hai.</li>
+    </ul>
+
+    <div class="section-title">4. Sales and Purchase Management</div>
+    <p>Odoo mein sales aur purchase management kaafi easy hota hai. Aap sales orders, purchase orders, invoices aur
+      stock moves ko manage kar sakte hain.</p>
+
+    <div class="subsection-title">Sales Orders Management:</div>
+    <p>Sales orders ko manage karte waqt, aapko products, customers, aur payment terms ko define karna hota hai.</p>
+    <p class="highlight">Example - Creating a Sales Order:</p>
+    <pre><code class="language-xml">&lt;odoo&gt;
+      &lt;record id="sales_order_001" model="sale.order"&gt;
+          &lt;field name="partner_id" ref="base.res_partner_1"/&gt;  &lt;!-- Customer --&gt;
+          &lt;field name="order_line"&gt;
+              &lt;record id="sales_order_line_001" model="sale.order.line"&gt;
+                  &lt;field name="product_id" ref="product.product_product_1"/&gt;  &lt;!-- Product --&gt;
+                  &lt;field name="product_uom_qty"&gt;1&lt;/field&gt;  &lt;!-- Quantity --&gt;
+                  &lt;field name="price_unit"&gt;500&lt;/field&gt;  &lt;!-- Price per unit --&gt;
+              &lt;/record&gt;
+          &lt;/field&gt;
+      &lt;/record&gt;
+      &lt;/odoo&gt;</code></pre>
+    <p><strong>Explanation:</strong></p>
+    <ul>
+      <li><code>sale.order</code>: Yeh model sales orders ko represent karta hai.</li>
+      <li><code>order_line</code>: Yeh field sales order mein products ko define karta hai.</li>
+      <li><code>product_id</code>: Yeh field product ko represent karta hai jo sale ho raha hai.</li>
+    </ul>
+
+    <div class="subsection-title">Purchase Orders Management:</div>
+    <p>Purchase orders mein suppliers se products purchase kiye jaate hain. Aap purchase orders ko easily manage kar
+      sakte hain aur invoices generate kar sakte hain.</p>
+    <p class="highlight">Example - Creating a Purchase Order:</p>
+    <pre><code class="language-xml">&lt;odoo&gt;
+      &lt;record id="purchase_order_001" model="purchase.order"&gt;
+          &lt;field name="partner_id" ref="base.res_partner_2"/&gt;  &lt;!-- Supplier --&gt;
+          &lt;field name="order_line"&gt;
+              &lt;record id="purchase_order_line_001" model="purchase.order.line"&gt;
+                  &lt;field name="product_id" ref="product.product_product_2"/&gt;  &lt;!-- Product --&gt;
+                  &lt;field name="product_uom_qty"&gt;10&lt;/field&gt;  &lt;!-- Quantity --&gt;
+                  &lt;field name="price_unit"&gt;100&lt;/field&gt;  &lt;!-- Price per unit --&gt;
+              &lt;/record&gt;
+          &lt;/field&gt;
+      &lt;/record&gt;
+      &lt;/odoo&gt;</code></pre>
+    <p><strong>Explanation:</strong></p>
+    <ul>
+      <li><code>purchase.order</code>: Yeh model purchase orders ko represent karta hai.</li>
+      <li><code>order_line</code>: Yeh field purchase order mein products ko define karta hai.</li>
+      <li><code>product_id</code>: Yeh field product ko represent karta hai jo purchase ho raha hai.</li>
+    </ul>
+
+    <div class="section-title">5. Inventory Management</div>
+    <p>Odoo mein inventory management kaafi simple aur flexible hai. Aap apne products ko manage kar sakte hain, stock
+      levels ko track kar sakte hain, aur products ko different warehouses mein allocate kar sakte hain.</p>
+
+    <div class="subsection-title">Managing Stock Movements:</div>
+    <p>Stock movements ko manage karne ke liye aapko product transfers aur inventory adjustments ka process samajhna
+      hoga.</p>
+    <p class="highlight">Example - Creating a Stock Movement:</p>
+    <pre><code class="language-xml">&lt;odoo&gt;
+      &lt;record id="stock_move_001" model="stock.move"&gt;
+          &lt;field name="product_id" ref="product.product_product_3"/&gt;  &lt;!-- Product --&gt;
+          &lt;field name="location_id" ref="stock.stock_location_stock"/&gt;  &lt;!-- From Location --&gt;
+          &lt;field name="location_dest_id" ref="stock.stock_location_customers"/&gt;  &lt;!-- To Location --&gt;
+          &lt;field name="product_uom_qty"&gt;5&lt;/field&gt;  &lt;!-- Quantity --&gt;
+      &lt;/record&gt;
+      &lt;/odoo&gt;</code></pre>
+    <p><strong>Explanation:</strong></p>
+    <ul>
+      <li><code>stock.move</code>: Yeh model stock movements ko represent karta hai.</li>
+      <li><code>location_id</code>: Yeh field source location ko represent karta hai.</li>
+      <li><code>location_dest_id</code>: Yeh field destination location ko represent karta hai.</li>
+    </ul>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="content">
+    <h1>9. Odoo Performance Optimization</h1>
+    <p>
+      Odoo mein performance optimization kaafi important hota hai, especially jab aapka data kaafi zyada ho aur system
+      slow ho. Yahan hum Odoo ke performance ko optimize karne ke liye kuch tools aur techniques ke baare mein discuss
+      karenge, jaise debugging tools, load balancing, caching, database tuning, aur profiling.
+    </p>
+
+    <div class="section-title">1. Debugging Tools in Odoo</div>
+    <p>
+      <strong>Odoo Shell:</strong><br>
+      Odoo shell ek command-line interface hai jisme aap Odoo ke models aur methods ko interact kar sakte hain, aur
+      debugging kar sakte hain.
+    </p>
+    <pre><code class="language-bash">
+  # Odoo shell open karna
+  $ ./odoo-bin shell
+      </code></pre>
+    <p>
+      <strong>Explanation:</strong><br>
+      Odoo shell se aap directly Odoo environment ke andar interact kar sakte hain. Yahan aap models ko query kar sakte
+      hain, data fetch kar sakte hain aur methods ko execute kar sakte hain.
+    </p>
+
+    <p>
+      <strong>Logs:</strong><br>
+      Odoo logs mein errors, warnings, aur other critical information hoti hai jo aapko system ki performance samajhne
+      mein madad karti hai.
+    </p>
+    <pre><code class="language-bash">
+  # Odoo.conf file mein log file ko enable karna
+  [options]
+      log_file = /var/log/odoo/odoo.log  # Yeh file location define karta hai jahan logs store hoti hain.
+      log_level = debug  # Logs ka level, debug se sab details milengi.
+      </code></pre>
+    <p>
+      <strong>Explanation:</strong><br>
+      <code>log_file</code>: Yeh Odoo ke log ko ek specific file mein store karta hai.<br>
+      <code>log_level</code>: Aapko debugging ke liye debug set karna chahiye, jisse aapko sab details milengi,
+      including queries aur errors.
+    </p>
+
+    <div class="section-title">2. Load Balancing and Caching</div>
+    <div class="subsection-title">Load Balancing:</div>
+    <p>
+      Agar aapka Odoo instance multiple users handle kar raha hai, toh load balancing ki zaroorat hoti hai. Load
+      balancing se traffic ko efficiently multiple servers pe distribute kiya jaata hai.
+    </p>
+    <pre><code class="language-nginx">
+  # Nginx config for load balancing
+  upstream odoo_servers {
+      server 192.168.1.2:8069;  # Odoo server 1
+      server 192.168.1.3:8069;  # Odoo server 2
+  }
+  
+  server {
+      listen 80;
+  
+      location / {
+          proxy_pass http://odoo_servers;  # Load balancer se requests distribute karna
+      }
+  }
+      </code></pre>
+    <p>
+      <strong>Explanation:</strong><br>
+      <code>upstream</code>: Yahan aap multiple Odoo servers define karte hain, aur Nginx requests ko un servers pe
+      distribute karta hai.<br>
+      <code>proxy_pass</code>: Yeh directive Nginx ko batata hai ki request ko load-balanced servers pe forward kare.
+    </p>
+
+    <div class="subsection-title">Caching:</div>
+    <p>
+      Caching se aap frequently accessed data ko memory mein store kar sakte hain, taaki baar-baar database se fetch na
+      karna pade aur performance improve ho.
+    </p>
+    <pre><code class="language-bash">
+  # odoo.conf file mein caching configure karna
+  [options]
+      cache = True  # Caching enable karna
+      redis_server = 127.0.0.1  # Redis server address
+      redis_port = 6379  # Redis default port
+      </code></pre>
+    <p>
+      <strong>Explanation:</strong><br>
+      Caching enable karne se Odoo frequently accessed data ko Redis mein store karega aur next time us data ko directly
+      Redis se fetch karega, jo performance ko significantly improve karta hai.
+    </p>
+
+    <div class="section-title">3. Database Tuning</div>
+    <p>
+      Agar aapka Odoo system slow chal raha hai, toh database optimization karna zaroori hai. Yeh tuning queries ko
+      faster banata hai aur disk I/O ko minimize karta hai.
+    </p>
+    <div class="subsection-title">Indexes:</div>
+    <p>
+      Indexes ka use karke aap queries ko fast bana sakte hain, especially jab aap large datasets ke saath kaam kar rahe
+      hote hain.
+    </p>
+    <pre><code class="language-sql">
+  -- PostgreSQL mein index add karna
+  CREATE INDEX idx_partner_name ON res_partner (name);
+      </code></pre>
+    <p>
+      <strong>Explanation:</strong><br>
+      <code>CREATE INDEX</code>: Yeh command PostgreSQL mein index create karti hai. Index search operations ko fast
+      banaata hai.
+    </p>
+
+    <div class="subsection-title">Vacuuming:</div>
+    <p>
+      Database ko periodically vacuum karna chahiye, taaki unused space ko free kiya ja sake aur performance improve ho.
+    </p>
+    <pre><code class="language-bash">
+  # Vacuum command
+  $ vacuumdb --all --analyze
+      </code></pre>
+    <p>
+      <strong>Explanation:</strong><br>
+      Vacuum command database ko optimize karti hai by reclaiming space aur improving query performance.
+    </p>
+
+    <div class="section-title">4. Profiling and Optimizing Code</div>
+    <div class="subsection-title">Profiling:</div>
+    <p>
+      Profiling se aap code ke performance ko analyze kar sakte hain. Aap dekh sakte hain ki kaunsa code snippet zyada
+      time le raha hai.
+    </p>
+    <pre><code class="language-python">
+  from odoo import api, models
+  import cProfile
+  
+  class Product(models.Model):
+      _name = 'product.template'
+  
+      @api.model
+      def method_to_profile(self):
+          # Profiling ke liye function
+          cProfile.run('self.env['product.template'].search([])')
+      </code></pre>
+    <p>
+      <strong>Explanation:</strong><br>
+      <code>cProfile</code>: Yeh Python ka ek module hai jo code ki execution time ko track karta hai.
+    </p>
+
+    <div class="subsection-title">Optimizing Code:</div>
+    <p>
+      Odoo mein performance optimization ka ek important aspect hai efficient queries aur methods ka use karna. Aapko
+      hammesha try karna chahiye ki aapke queries optimized ho.
+    </p>
+    <pre><code class="language-python">
+  # Inefficient query
+  products = self.env['product.template'].search([])
+  
+  # Optimized query
+  products = self.env['product.template'].sudo().search([('sale_ok', '=', True)], limit=100)  # Limiting results
+      </code></pre>
+    <p>
+      <strong>Explanation:</strong><br>
+      <code>sudo()</code>: Superuser privileges deta hai jo sensitive data ko access karne mein madad karta hai.<br>
+      <code>limit</code>: Query result ko limit karne se performance improve hota hai, kyunki aapko unnecessary records
+      ko fetch nahi karna padta.
+    </p>
+
+    <div class="section-title">Conclusion</div>
+    <p>
+      Odoo performance optimization mein debugging tools, load balancing, caching, database tuning, aur code
+      optimization kaafi important cheezein hain. In techniques ko implement karke aap apne Odoo system ko efficiently
+      run kar sakte hain, especially jab aapka data aur users kaafi zyada ho.
+    </p>
+    <ul>
+      <li><strong>Debugging Tools</strong> - Odoo shell aur logs se aap easily errors aur performance issues trace kar
+        sakte hain.</li>
+      <li><strong>Load Balancing & Caching</strong> - Multiple servers pe load balance aur caching se performance
+        improve kar sakte hain.</li>
+      <li><strong>Database Tuning</strong> - Indexing aur vacuuming se aap database ki performance optimize kar sakte
+        hain.</li>
+      <li><strong>Profiling & Optimizing Code</strong> - Code profiling aur optimized queries se aap application ki
+        efficiency badha sakte hain.</li>
+    </ul>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="content" style="background-color: #e1ffb58e;">
+    <h1>10. Deployment and Hosting in Odoo</h1>
+    <p>Odoo ka deployment ek critical process hai, jo aapke Odoo system ko production environment mein smoothly chalne
+      ke liye zaroori hota hai. Aapko development aur production environments ko samajhna hoga, aur deployment ke liye
+      alag-alag platforms jaise Odoo.sh, AWS, Google Cloud, DigitalOcean, aur Docker ka use karna hoga.</p>
+
+    <h2>1. Development vs. Production Environments</h2>
+    <div class="section-title">Development Environment:</div>
+    <ul>
+      <li>Local machine pe Odoo setup.</li>
+      <li>Development tools like Visual Studio Code, PyCharm.</li>
+      <li>Debugging aur testing ke liye log files aur shell ka use.</li>
+      <li>Frequently changing code and settings.</li>
+    </ul>
+
+    <div class="section-title">Production Environment:</div>
+    <ul>
+      <li>Server pe Odoo ka stable aur optimized version.</li>
+      <li>No direct changes to code in production (except through updates/deployment).</li>
+      <li>Security hardening, backup configuration, and load balancing.</li>
+      <li>Odoo performance monitoring tools.</li>
+    </ul>
+
+    <h2>2. Deployment on Odoo.sh</h2>
+    <p>Odoo.sh ek managed platform hai jahan Odoo ko deploy aur host karne ke liye optimized environment milta hai.
+      Yahan aap apne Odoo instance ko easily deploy aur maintain kar sakte hain.</p>
+
+    <div class="subsection-title">Steps to Deploy on Odoo.sh:</div>
+    <div class="highlight">
+      <h3>Odoo.sh Account Create Karna:</h3>
+      <p>Odoo.sh par account create karke, aap apne Odoo repositories ko connect kar sakte hain.</p>
+    </div>
+    <div class="highlight">
+      <h3>GitHub/GitLab Repository Setup:</h3>
+      <p>Aap apne code ko GitHub ya GitLab repository mein store karte hain, jisse Odoo.sh repository ko connect karke
+        automatic updates ho sake.</p>
+    </div>
+
+    <div class="highlight">
+      <h3>Deployment Configuration:</h3>
+      <p>Odoo.sh aapko deployment ke liye ek intuitive interface provide karta hai, jahan aap apne repositories ko
+        clone, update, aur deploy kar sakte hain.</p>
+    </div>
+
+    <div class="highlight">
+      <h3>Continuous Integration (CI):</h3>
+      <p>Odoo.sh mein CI/CD pipelines setup karna hota hai jisse aapke code ko update hone par automatically test aur
+        deploy kiya ja sake.</p>
+    </div>
+
+    <h2>3. Deployment on Cloud Platforms</h2>
+    <p>Cloud platforms par Odoo ko deploy karna bahut common aur flexible hai, jahan aap apne Odoo instance ko remotely
+      host kar sakte hain. Kuch popular platforms hain:</p>
+    <ul>
+      <li>AWS (Amazon Web Services)</li>
+      <li>Google Cloud Platform (GCP)</li>
+      <li>DigitalOcean</li>
+    </ul>
+
+    <div class="subsection-title">General Steps for Deploying on AWS, GCP, or DigitalOcean:</div>
+    <ul>
+      <li>Create Cloud Instance: AWS, GCP, ya DigitalOcean pe instance create karein. Ye instance usually ek virtual
+        server hota hai jo aapke Odoo instance ko host karega.</li>
+      <li>Install Odoo on Server: Cloud instance pe Odoo install karna hota hai. Aap command line ka use karke Odoo ko
+        install kar sakte hain.</li>
+    </ul>
+
+    <div class="highlight">
+      <h3>Example for Ubuntu on AWS:</h3>
+      <pre><code class="language-bash">sudo apt-get update
+  sudo apt-get install python3-pip python3-dev
+  sudo apt-get install libxml2-dev libssl-dev libldap2-dev libsasl2-dev libjpeg-dev liblcms2-dev zlib1g-dev
+  sudo apt-get install build-essential libssl-dev libxml2-dev libldap2-dev libsasl2-dev
+  sudo pip3 install odoo</code></pre>
+    </div>
+
+    <div class="highlight">
+      <h3>Configure Database (PostgreSQL):</h3>
+      <pre><code class="language-bash">sudo apt-get install postgresql
+  sudo -u postgres createuser --pwprompt odoo_user
+  sudo -u postgres createdb --owner=odoo_user odoo_db</code></pre>
+    </div>
+
+    <div class="highlight">
+      <h3>Configure Odoo.conf:</h3>
+      <pre><code class="language-bash">[options]
+  db_host = False
+  db_port = False
+  db_user = odoo_user
+  db_password = your_password
+  db_name = odoo_db
+  logfile = /var/log/odoo/odoo.log</code></pre>
+    </div>
+
+    <div class="highlight">
+      <h3>Enable and Start Odoo:</h3>
+      <pre><code class="language-bash">sudo systemctl start odoo
+  sudo systemctl enable odoo</code></pre>
+    </div>
+
+    <h2>4. Docker Setup for Odoo</h2>
+    <p>Docker Odoo ke deployment ke liye ek convenient aur isolated environment provide karta hai. Docker ko use karke
+      aap easily Odoo ko container mein run kar sakte hain.</p>
+
+    <div class="subsection-title">Steps for Docker Setup:</div>
+    <ul>
+      <li>Install Docker: Sabse pehle Docker ko apne system pe install karna hoga.</li>
+      <li>Odoo Docker Image Pull Karna: Odoo ka official Docker image pull karke aap apne container mein Odoo run kar
+        sakte hain.</li>
+    </ul>
+
+    <div class="highlight">
+      <h3>Example for Ubuntu:</h3>
+      <pre><code class="language-bash">sudo apt-get update
+  sudo apt-get install docker.io</code></pre>
+    </div>
+
+    <div class="highlight">
+      <h3>Docker Compose Setup:</h3>
+      <pre><code class="language-yaml">version: '3'
+  
+  services:
+    web:
+      image: odoo:16
+      ports:
+        - "8069:8069"
+      environment:
+        - HOST=db
+        - USER=odoo
+        - PASSWORD=your_password
+      depends_on:
+        - db
+    db:
+      image: postgres:13
+      environment:
+        - POSTGRES_USER=odoo
+        - POSTGRES_PASSWORD=your_password
+      volumes:
+        - odoo-db-data:/var/lib/postgresql/data
+  
+  volumes:
+    odoo-db-data:</code></pre>
+    </div>
+
+    <div class="highlight">
+      <h3>Running the Containers:</h3>
+      <pre><code class="language-bash">docker-compose up -d</code></pre>
+    </div>
+
+    <h2>5. SSL Setup and Domain Configuration</h2>
+    <p>Aapko production environment mein SSL (Secure Sockets Layer) ko enable karna zaroori hota hai taaki aapka site
+      secure ho aur HTTPS connection use kare. Domain configuration se aap apne custom domain name ko Odoo ke server se
+      link kar sakte hain.</p>
+
+    <div class="subsection-title">SSL Setup using Let's Encrypt:</div>
+    <ul>
+      <li>Install Certbot: Certbot ek free tool hai jo aapko SSL certificates provide karta hai.</li>
+      <li>SSL Certificate Generate Karna: Certbot ko use karke SSL certificate generate kar sakte hain.</li>
+    </ul>
+
+    <div class="highlight">
+      <h3>Example for Ubuntu:</h3>
+      <pre><code class="language-bash">sudo apt-get update
+  sudo apt-get install certbot python3-certbot-nginx</code></pre>
+    </div>
+
+    <div class="highlight">
+      <h3>SSL Certificate Generate Karna:</h3>
+      <pre><code class="language-bash">sudo certbot --nginx -d yourdomain.com</code></pre>
+    </div>
+
+    <div class="highlight">
+      <h3>Nginx Configuration:</h3>
+      <pre><code class="language-nginx">server {
+      listen 443 ssl;
+      server_name yourdomain.com;
+  
+      ssl_certificate /etc/letsencrypt/live/yourdomain.com/fullchain.pem;
+      ssl_certificate_key /etc/letsencrypt/live/yourdomain.com/privkey.pem;
+  
+      location / {
+          proxy_pass http://127.0.0.1:8069;
+        }
+       }</code></pre>
+    </div>
+
+  </div>
+
+
+
+
+
+
+  <div class="content" style="background-color: #fcd88e73;">
+    <h1>11. Upgrades and Migration in Odoo</h1>
+
+    <p>
+      Odoo system ka upgrade aur migration process ek important task hai jo ensure karta hai ki aapka Odoo version aur
+      modules smoothly work karein jab aap naye version pe move karte hain. Migration mainly do cheezon se related hota
+      hai: module versioning aur database migration.
+    </p>
+
+    <div class="section-title">1. Module Versioning and Migration Best Practices</div>
+
+    <div class="subsection-title">Module Versioning:</div>
+    <p>
+      Module versioning ka matlab hai har module ki ek versioning scheme ko follow karna, jisse aapko code updates aur
+      upgrades ko manage karne mein madad mile. Odoo mein har module ka version define kiya jata hai, jise aap apne
+      custom modules ke liye set kar sakte hain.
+    </p>
+    <p>
+      <strong>Versioning Format:</strong> Odoo module versioning scheme usually <code>major.minor.patch</code> format
+      mein hota hai.
+    </p>
+    <ul>
+      <li><strong>Major version:</strong> Major changes jaise backward incompatible changes (e.g., data structure
+        changes).</li>
+      <li><strong>Minor version:</strong> Feature updates, enhancements, but backward compatibility maintained.</li>
+      <li><strong>Patch version:</strong> Bug fixes, small improvements, and no changes to API or features.</li>
+    </ul>
+
+    <p><strong>Example - Module Versioning in <code>__manifest__.py</code>:</strong></p>
+    <pre><code class="language-python">
+    {
+        'name': 'My Custom Module',
+        'version': '1.0.1',  # Major.Minor.Patch format
+        'depends': ['base'],
+        'data': ['views/my_custom_module_view.xml'],
+        'installable': True,
+    }
+      </code></pre>
+
+    <div class="highlight">
+      <p><strong>Benefits of Versioning:</strong></p>
+      <ul>
+        <li>Aap easily version changes track kar sakte hain.</li>
+        <li>Jab aap apne module ko upgrade karte hain, aap previous versions ke bugs aur fixes ko manage kar sakte hain.
+        </li>
+        <li>Versioning se users ko pata chal jata hai ki kaunse updates apply kiye gaye hain.</li>
+      </ul>
+    </div>
+
+    <div class="subsection-title">Module Migration:</div>
+    <p>
+      Module migration ka matlab hai apne custom modules ko naye Odoo versions ke saath compatible banana. Agar aap
+      purane version (e.g., Odoo v14) se naye version (e.g., Odoo v16) par migrate kar rahe hain, toh aapko apne modules
+      ko update karna padta hai.
+    </p>
+
+    <div class="section-title">Migration Steps:</div>
+    <ul>
+      <li><strong>Understand API Changes:</strong> Odoo ka har version apne API mein changes laata hai. Aapko apne
+        modules ko naye APIs ke saath compatible banana padta hai.</li>
+      <li><strong>Update Fields and Models:</strong> Agar database schema mein changes hue hain, toh aapko apne model
+        definitions ko update karna hoga.</li>
+      <li><strong>Data Migration:</strong> Purane version ke data ko naye version ke format mein migrate karna hota hai.
+      </li>
+    </ul>
+
+    <p><strong>Example - Migration from Odoo v14 to v16:</strong></p>
+    <p>
+      Agar aapne apne module mein kuch fields add kiye hain, jaise ek custom field <code>x_custom_field</code> v14 mein
+      tha, aur ab v16 mein bhi usko update karna hai, toh aapko migration script likhna padega.
+    </p>
+
+    <p><strong>Migration Script Example:</strong></p>
+    <pre><code class="language-python">
+    from odoo import api, fields, models
+    
+    class MigrationScript(models.TransientModel):
+        _name = 'custom.module.migration'
+        _description = 'Migration script for custom module'
+    
+        def migrate_v14_to_v16(self):
+            # Migration for custom field 'x_custom_field'
+            # This will be called when migrating from Odoo v14 to v16
+            records = self.env['custom.model'].search([('x_custom_field', '!=', False)])
+            for record in records:
+                # Apply necessary changes in the data, like type conversion, renaming fields, etc.
+                record.write({
+                    'x_custom_field': record.x_custom_field + 10  # Example modification
+                })
+      </code></pre>
+
+    <div class="highlight">
+      <p><strong>Explanation:</strong></p>
+      <ul>
+        <li><strong>migrate_v14_to_v16:</strong> Method is written in the custom migration script.</li>
+        <li>In this script, the old records are updated to the new structure or format. Here, we updated the custom
+          field <code>x_custom_field</code>.</li>
+      </ul>
+    </div>
+
+    <div class="section-title">2. Database Migrations (e.g., from v14 to v16)</div>
+    <p>
+      Database migration Odoo ke version upgrade process ka ek critical hissa hai, jisme purani database schema ko naye
+      version ke schema ke according modify karna padta hai.
+    </p>
+
+    <div class="section-title">Database Migration Steps:</div>
+    <ul>
+      <li><strong>Backup the Database:</strong> Sabse pehle apne production database ka backup lena zaroori hai. Ye step
+        aapko data loss se bachata hai. Backup karne ke liye aap pg_dump ya Odoo ke internal tools ka use kar sakte
+        hain.</li>
+      <li><strong>Check for Schema Changes:</strong> Odoo ke naye version mein schema changes ho sakte hain, jaise naye
+        fields, tables, ya relations. Inko identify karne ke liye aapko Odoo ke release notes ya changelogs ko padhna
+        hoga.</li>
+      <li><strong>Update <code>__manifest__.py</code> for New Version:</strong> Module ke <code>__manifest__.py</code>
+        file ko naye version ke liye update karna hoga. Jaise field definitions, dependencies, aur XML files ko naye
+        version ke hisaab se modify karna padta hai.</li>
+      <li><strong>Run Migration Commands:</strong> Odoo ke <code>-u</code> option ka use karke modules ko update kar
+        sakte hain, jisse naye changes apply ho jate hain. Command:
+        <code>./odoo-bin -c /etc/odoo.conf -d odoo_db -u all</code>
+      </li>
+      <li><strong>Manual Migration Adjustments:</strong> Kabhi-kabhi, automatic migration tools sab kuch handle nahi
+        karte, isliye aapko manually bhi data ko adjust karna padta hai, jaise field types ko change karna, purani
+        records ko update karna, etc.</li>
+      <li><strong>Test the Migration:</strong> Migration ke baad apne system ko thoroughly test karna zaroori hota hai.
+        Check karein ki sabhi fields, views, aur reports properly migrate hue hain ya nahi.</li>
+    </ul>
+
+    <p><strong>Example - Database Migration Script:</strong></p>
+    <pre><code class="language-python">
+    from odoo import api, fields, models
+    
+    class DatabaseMigration(models.Model):
+        _name = 'custom.module.migration'
+    
+        @api.model
+        def migrate_v14_to_v16(self):
+            # Migrate records from old structure to new structure
+            records = self.env['custom.model'].search([('old_field', '!=', False)])
+            for record in records:
+                # Migrate old data to new format
+                record.write({
+                    'new_field': record.old_field * 2  # Example of data transformation
+                })
+      </code></pre>
+
+    <div class="highlight">
+      <p><strong>Explanation:</strong></p>
+      <ul>
+        <li><strong>migrate_v14_to_v16:</strong> This function migrates the old records to the new format. It updates
+          your custom fields, models, and relations.</li>
+      </ul>
+    </div>
+
+    <div class="section-title">3. Testing Migration:</div>
+    <p>
+      Migration complete hone ke baad testing step sabse zaroori hai. Aapko ensure karna padta hai ki koi data loss na
+      ho aur naye version mein sab kuch sahi se kaam karein.
+    </p>
+
+    <div class="highlight">
+      <p><strong>Test Case Examples:</strong></p>
+      <ul>
+        <li><strong>Database Integrity Test:</strong> Check karein ki koi important data migrate hone ke baad missing na
+          ho.</li>
+        <li><strong>Performance Test:</strong> Test karein ki naye version mein performance optimum hai.</li>
+        <li><strong>UI Test:</strong> Check karein ki naye features aur modules correctly render ho rahe hain.</li>
+      </ul>
+    </div>
+
+    <div class="section-title">Conclusion</div>
+    <p>
+      Odoo version upgrade aur module migration ek complex process ho sakta hai, lekin agar aap careful planning aur
+      proper versioning practices follow karte hain, toh ye process kaafi smooth ho sakta hai. Database migration aur
+      module updates carefully handle karne se aap apne system ko stable aur future-proof bana sakte hain. Migration ke
+      baad testing se aap ensure kar sakte hain ki sab kuch correctly work kar raha hai aur aapke users ko koi
+      disruptions nahi mil rahi hain.
+    </p>
+
+    <div class="section-title">Key Takeaways:</div>
+    <ul>
+      <li>Versioning aur module migration aapko Odoo system ko up-to-date aur compatible banaye rakhne mein madad karte
+        hain.</li>
+      <li>Database migration ka process data integrity, compatibility aur performance ko ensure karta hai.</li>
+      <li>Testing phase ko kabhi bhi skip na karein, jisse aap migration ke baad apne system ki stability ko confirm kar
+        sakte hain.</li>
+    </ul>
+
+    <div class="section-title">Further Reading:</div>
+    <p>
+      Odoo ke official documentation mein aapko versioning aur migration ke related detailed guidelines mil jayenge.
+      Aapko apne use case ke according best practices follow karna hoga. Migration tools aur scripts ko samajhna aur
+      custom adjustments karna bhi zaroori ho sakta hai.
+    </p>
+    <p>
+      Agar aapko migration process ke baare mein aur details chahiye, toh aap Odoo ke changelogs, upgrade guides, aur
+      developer forums ko refer kar sakte hain.
+    </p>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="content">
+    <h1>Complete Odoo Example</h1>
+    <p>The folder structure for your custom Odoo module is as follows:</p>
+    <pre><code>bash
+    my_custom_module/
+    │
+    ├── controllers/
+    │   └── main.py
+    │
+    ├── models/
+    │   └── my_model.py
+    │
+    ├── static/
+    │   └── src/
+    │       ├── js/
+    │       │   └── custom_widget.js
+    │       └── css/
+    │           └── custom.css
+    │
+    ├── views/
+    │   ├── my_model_views.xml
+    │   ├── my_model_tree_view.xml
+    │   ├── my_model_kanban_view.xml
+    │   ├── my_model_search_view.xml
+    │   └── assets.xml
+    │
+    ├── security/
+    │   └── my_custom_model_access.xml
+    │
+    ├── data/
+    │   └── cron_jobs.xml
+    │
+    ├── reports/
+    │   └── my_custom_report.xml
+    │
+    ├── __manifest__.py
+    └── __init__.py
+    </code></pre>
+
+    <p><strong>1. __manifest__.py</strong></p>
+    <div class="highlight">
+      <pre><code class="python">
+      {
+          'name': 'My Custom Module with Owl JS',
+          'version': '1.0',
+          'author': 'Your Name',
+          'website': 'https://www.example.com',
+          'depends': ['base', 'web', 'report'],
+          'data': [
+              'views/my_model_views.xml',
+              'views/my_model_tree_view.xml',
+              'views/my_model_kanban_view.xml',
+              'views/my_model_search_view.xml',
+              'views/assets.xml',
+              'security/my_custom_model_access.xml',
+              'data/cron_jobs.xml',
+              'reports/my_custom_report.xml',
+          ],
+          'assets': {
+              'web.assets_backend': [
+                  'my_custom_module/static/src/js/custom_widget.js',
+                  'my_custom_module/static/src/css/custom.css',
+              ],
+          },
+          'installable': True,
+          'auto_install': False,
+      }
+      </code></pre>
+    </div>
+
+    <p><strong>2. controllers/main.py</strong></p>
+    <div class="highlight">
+      <pre><code class="python">
+      from odoo import http
+      from odoo.http import request
+      import json
+  
+      class MyCustomController(http.Controller):
+          @http.route('/my_custom_module/api/data', auth='public', type='json', methods=['GET'])
+          def get_data(self, **kw):
+              records = request.env['my.custom.model'].search([])
+              data = []
+              for record in records:
+                  data.append({
+                      'name': record.name,
+                      'description': record.description,
+                      'price': record.price,
+                  })
+              return json.dumps(data)
+      </code></pre>
+    </div>
+
+    <p><strong>3. models/my_model.py</strong></p>
+    <div class="highlight">
+      <pre><code class="python">
+      from odoo import models, fields
+      from odoo import api
+  
+      class MyCustomModel(models.Model):
+          _name = 'my.custom.model'
+          _description = 'My Custom Model with Cron and Reports'
+  
+          name = fields.Char(string='Name', required=True)
+          description = fields.Text(string='Description')
+          price = fields.Float(string='Price')
+          active = fields.Boolean(string='Active', default=True)
+  
+          @api.model
+          def update_prices(self):
+              records = self.search([])
+              for record in records:
+                  record.price += 10
+              return True
+      </code></pre>
+    </div>
+
+    <p><strong>4. data/cron_jobs.xml</strong></p>
+    <div class="highlight">
+      <pre><code class="xml">
+      <odoo>
+          <data noupdate="1">
+              <record id="ir_cron_update_prices" model="ir.cron">
+                  <field name="name">Update Prices</field>
+                  <field name="model_id" ref="model_my_custom_model"/>
+                  <field name="state">code</field>
+                  <field name="code">model.update_prices()</field>
+                  <field name="interval_number">1</field>
+                  <field name="interval_type">days</field>
+                  <field name="numbercall">-1</field>
+                  <field name="active" eval="True"/>
+              </record>
+          </data>
+      </odoo>
+      </code></pre>
+    </div>
+
+    <p><strong>5. reports/my_custom_report.xml</strong></p>
+    <div class="highlight">
+      <pre><code class="xml">
+      <odoo>
+          <report
+              id="action_my_custom_report"
+              model="my.custom.model"
+              string="My Custom Report"
+              report_type="qweb-pdf"
+              name="my_custom_module.my_custom_report_template"
+              file="my_custom_module.my_custom_report_template"
+              print_report_name="'Custom Report - %s' % (object.name)"
+          />
+      </odoo>
+      </code></pre>
+    </div>
+
+    <p><strong>6. static/src/js/custom_widget.js</strong></p>
+    <div class="highlight">
+      <pre><code class="javascript">
+      odoo.define('my_custom_module.custom_widget', function (require) {
+          "use strict";
+          const { Component } = require('owl');
+          const { useState } = require('owl.hooks');
+  
+          class CustomWidget extends Component {
+              constructor() {
+                  super(...arguments);
+                  this.state = useState({
+                      message: 'Hello from OWL JS!',
+                  });
+              }
+  
+              updateMessage() {
+                  this.state.message = 'Message Updated!';
+              }
+          }
+  
+          CustomWidget.template = 'my_custom_module.custom_widget_template';
+          return CustomWidget;
+      });
+      </code></pre>
+    </div>
+
+    <p><strong>7. views/assets.xml</strong></p>
+    <div class="highlight">
+      <pre><code class="xml">
+      <odoo>
+          <template id="assets_backend" name="my_custom_module assets" inherit_id="web.assets_backend">
+              <xpath expr="." position="inside">
+                  <script type="text/javascript" src="/my_custom_module/static/src/js/custom_widget.js"></script>
+                  <link rel="stylesheet" href="/my_custom_module/static/src/css/custom.css"/>
+              </xpath>
+          </template>
+      </odoo>
+      </code></pre>
+    </div>
+
+    <p><strong>8. static/src/css/custom.css</strong></p>
+    <div class="highlight">
+      <pre><code class="css">
+      .custom-widget {
+          background-color: #f4f4f4;
+          padding: 20px;
+          border-radius: 5px;
+          text-align: center;
+          font-size: 18px;
+      }
+      </code></pre>
+    </div>
+
+    <p><strong>9. views/my_model_views.xml (Kanban View)</strong></p>
+    <div class="highlight">
+      <pre><code class="xml">
+      <odoo>
+          <!-- Kanban View -->
+          <record id="view_my_custom_model_kanban" model="ir.ui.view">
+              <field name="name">my.custom.model.kanban</field>
+              <field name="model">my.custom.model</field>
+              <field name="arch" type="xml">
+                  <kanban string="My Custom Model">
+                      <field name="name"/>
+                      <field name="price"/>
+                      <templates>
+                          <t t-name="kanban-box">
+                              <div class="oe_kanban_card">
+                                  <div class="oe_kanban_details">
+                                      <div t-field="record.name"/>
+                                      <div t-field="record.price"/>
+                                  </div>
+                              </div>
+                          </t>
+                      </templates>
+                  </kanban>
+              </field>
+          </record>
+  
+          <!-- Search View -->
+          <record id="view_my_custom_model_search" model="ir.ui.view">
+              <field name="name">my.custom.model.search</field>
+              <field name="model">my.custom.model</field>
+              <field name="arch" type="xml">
+                  <search string="My Custom Model">
+                      <field name="name"/>
+                      <field name="price"/>
+                      <filter string="Active" domain="[('active', '=', True)]"/>
+                  </search>
+              </field>
+          </record>
+      </odoo>
+      </code></pre>
+    </div>
+
+    <p><strong>10. security/my_custom_model_access.xml (Access Rights)</strong></p>
+    <div class="highlight">
+      <pre><code class="xml">
+      <odoo>
+          <data noupdate="1">
+              <!-- Group definition -->
+              <record id="group_my_custom_model_user" model="res.groups">
+                  <field name="name">My Custom Model User</field>
+              </record>
+  
+              <!-- Access rights for the model -->
+              <record id="access_my_custom_model_user" model="ir.model.access">
+                  <field name="name">my.custom.model user access</field>
+                  <field name="model_id" ref="model_my_custom_model"/>
+                  <field name="group_id" ref="group_my_custom_model_user"/>
+                  <field name="perm_read" eval="True"/>
+                  <field name="perm_write" eval="True"/>
+                  <field name="perm_create" eval="True"/>
+                  <field name="perm_unlink" eval="True"/>
+              </record>
+          </data>
+      </odoo>
+      </code></pre>
+    </div>
+
+    <p><strong>11. __init__.py</strong></p>
+    <div class="highlight">
+      <pre><code class="python">
+      from . import models
+      from . import controllers
+      </code></pre>
+    </div>
+
+    <p><strong>12. module directory structure recap:</strong></p>
+    <div class="highlight">
+      <pre><code>bash
+      my_custom_module/
+      ├── __init__.py
+      ├── __manifest__.py
+      ├── controllers/
+      │   └── main.py
+      ├── models/
+      │   └── my_model.py
+      ├── security/
+      │   └── my_custom_model_access.xml
+      ├── views/
+      │   ├── my_model_views.xml
+      │   ├── my_model_tree_view.xml
+      │   ├── my_model_kanban_view.xml
+      │   └── my_model_search_view.xml
+      ├── static/
+      │   ├── src/
+      │   │   ├── js/
+      │   │   │   └── custom_widget.js
+      │   │   └── css/
+      │   │       └── custom.css
+      ├── reports/
+      │   └── my_custom_report.xml
+      ├── data/
+      │   └── cron_jobs.xml
+      └── assets.xml
+      </code></pre>
+    </div>
+
+    <p>This structure and code layout gives you a fully functional custom Odoo module using the Owl JS framework for
+      frontend interactions, with models, views, reports, cron jobs, and proper access controls. All necessary
+      configurations are included to implement functionality like fetching data through an API, dynamic price updates,
+      and reports.</p>
+
+    <p>Don't forget to commit the changes and regularly test the module to ensure the cron jobs, widgets, and reports
+      are functioning correctly. Make sure the access control lists (ACL) are properly set to manage the permissions of
+      the users accessing the module.</p>
+
+  </div>
+
+
+
+
+</body>
+
+
+
+</html>
