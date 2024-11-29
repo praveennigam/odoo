@@ -1022,6 +1022,90 @@ static/
 
 
 
+  <div class="content" style="margin-bottom:20px;">
+    <h1>Cron Job in Odoo</h1>
+    <p>Yeh example hai ki kaise Odoo mein cron jobs ko define karte hain:</p>
+
+    <h2 class="section-title">1. Python Method (Task to be performed)</h2>
+    <p>Pehle hum ek Python method banate hain jo cron job ke through run hoga. Is method mein hum wo task likhenge jo automatic execute karna hai.</p>
+    
+    <pre><code class="language-python">
+from odoo import models, fields, api
+
+class ReportGenerator(models.Model):
+    _name = 'report.generator'  # Yeh model ka naam hai, jisme cron job ka task hoga.
+    
+    @api.model  # Yeh decorator batata hai ki yeh method model ke liye hai.
+    def generate_report(self):
+        # Yahan pe apna logic likhenge jo report ko generate karega.
+        # Example: Report ko generate karna (yeh sirf ek placeholder hai).
+        print("Report generated successfully")  # Yeh message show hoga jab report generate ho.
+    </code></pre>
+
+    <h2 class="section-title">Explanation:</h2>
+    <ul>
+      <li><span class="highlight">generate_report(self):</span> Yeh method hai jo cron job ke through run hoga. Aap isme apni logic likh sakte hain jaise report generate karna, data fetch karna, etc.</li>
+      <li><span class="highlight">print("Report generated successfully"):</span> Yeh ek example hai, jab cron job chalega toh yeh message print hoga.</li>
+    </ul>
+
+    <h2 class="section-title">2. XML File (Cron Job Definition)</h2>
+    <p>Ab hum XML file mein cron job define karenge. Yeh Odoo ko batata hai ki kab aur kaise cron job run hona chahiye.</p>
+
+    <pre><code class="language-xml">
+&lt;odoo&gt;
+    &lt;data noupdate="1"&gt;
+        &lt;record id="cron_generate_report" model="ir.cron"&gt;
+            &lt;!-- Cron job ka naam dena --&gt;
+            &lt;field name="name"&gt;Daily Report Generator&lt;/field&gt;  &lt;!-- Iska naam Odoo mein dikhai dega. --&gt;
+            
+            &lt;!-- Kaunsa model hai jisme task hai --&gt;
+            &lt;field name="model_id" ref="model_report_generator"/&gt;  &lt;!-- Yeh humare 'report.generator' model ko point karta hai. --&gt;
+            
+            &lt;!-- Task ka state --&gt;
+            &lt;field name="state"&gt;code&lt;/field&gt;  &lt;!-- Code state ka matlab hai ki yeh Python method call hoga. --&gt;
+            
+            &lt;!-- Python method ka naam jo execute karna hai --&gt;
+            &lt;field name="code"&gt;model.generate_report()&lt;/field&gt;  &lt;!-- Yeh humare 'generate_report' method ko call karega. --&gt;
+            
+            &lt;!-- Interval ka time specify karte hain (kitni der baad task run hoga) --&gt;
+            &lt;field name="interval_number"&gt;1&lt;/field&gt;  &lt;!-- Har 1 din baad yeh cron job chalega. --&gt;
+            &lt;field name="interval_type"&gt;days&lt;/field&gt;  &lt;!-- 'days' ka matlab hai daily interval. --&gt;
+            
+            &lt;!-- Cron job ko active karna --&gt;
+            &lt;field name="active" eval="True"/&gt;  &lt;!-- Yeh field bataata hai ki cron job active hai. --&gt;
+        &lt;/record&gt;
+    &lt;/data&gt;
+&lt;/odoo&gt;
+    </code></pre>
+
+    <h2 class="section-title">Explanation:</h2>
+    <ul>
+      <li><span class="highlight">&lt;field name="name"&gt;Daily Report Generator&lt;/field&gt;:</span> Yeh field cron job ka naam define karta hai, jo Odoo mein dikhai dega.</li>
+      <li><span class="highlight">&lt;field name="model_id" ref="model_report_generator"/&gt;:</span> Yeh field specify karta hai ki cron job kis model ke liye hai. Yahan pe hum report.generator model ka reference de rahe hain.</li>
+      <li><span class="highlight">&lt;field name="state"&gt;code&lt;/field&gt;:</span> Isse hum Odoo ko batate hain ki task ek Python method ke through execute hoga.</li>
+      <li><span class="highlight">&lt;field name="code"&gt;model.generate_report()&lt;/field&gt;:</span> Yeh Python method ka naam hai jo cron job run karega.</li>
+      <li><span class="highlight">&lt;field name="interval_number"&gt;1&lt;/field&gt; aur &lt;field name="interval_type"&gt;days&lt;/field&gt;:</span> Yeh batate hain ki cron job har 1 din mein execute hoga. Agar aap chahte hain ki wo weekly chale, toh interval_number ko 1 aur interval_type ko weeks kar sakte hain.</li>
+      <li><span class="highlight">&lt;field name="active" eval="True"/&gt;:</span> Isse cron job ko active kiya jata hai. Agar aap chahte hain ki job temporarily disable ho, toh ise eval="False" kar sakte hain.</li>
+    </ul>
+
+    <h2 class="section-title">3. Cron Job ka Execution</h2>
+    <p>Jab aap Odoo mein module ko update karenge, toh yeh cron job schedule ho jayega. Odoo automatically har din 1 baar generate_report() method ko call karega aur report generate karega.</p>
+
+    <h2 class="section-title">Scheduled Actions ko dekhne ka tarika:</h2>
+    <ul>
+      <li>Aap Settings → Technical → Automation → Scheduled Actions me jaake cron jobs ko manage kar sakte hain.</li>
+      <li>Yahan aap apna cron job dekh sakte hain, execute kar sakte hain, ya modify kar sakte hain.</li>
+    </ul>
+
+    <h2 class="section-title">4. Summary (In Your Language)</h2>
+    <ul>
+      <li><span class="highlight">Python Method</span> mein aap wo task likhte hain jo cron job ko perform karwana hai (jaise report generate karna).</li>
+      <li><span class="highlight">XML File</span> mein aap cron job ko define karte hain, jisme aap batate hain ki kab aur kaise task run hoga.</li>
+      <li><span class="highlight">Cron Job Execution:</span> Jab Odoo ka cron job run hota hai, tab wo automatically aapke defined Python method ko call karega aur task execute karega.</li>
+    </ul>
+  </div>
+
+
 
   <div class="content"  style="margin-bottom: 20px;">
     <h1>3.Server-Side Development in Odoo</h1>
