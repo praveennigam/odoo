@@ -615,6 +615,78 @@ def list_partners(self):
 
 
 
+    <div class="content">
+        <h1>Odoo Fields - Deep Explanation in Your Style</h1>
+
+        <div class="section-title">1. Char Field</div>
+      <p><strong>Description:</strong> Ye field text data store karta hai, jaise names, titles, short descriptions, etc.</p>
+      <p><strong>Example:</strong> Aapke name, city, email jaise fields hote hain.</p>
+      <pre><code class="language-python">name = fields.Char(string="Name", required=True)</code></pre>
+      <p><strong>Usage:</strong> Ye field text ke roop me ek short string store karta hai.</p>
+  
+      <div class="section-title">2. Text Field</div>
+      <p><strong>Description:</strong> Ye field bhi text store karta hai, lekin Char field se zyada long text store kar sakta hai. Jaise ki long descriptions ya notes.</p>
+      <p><strong>Example:</strong> description field.</p>
+      <pre><code class="language-python">description = fields.Text(string="Description")</code></pre>
+      <p><strong>Usage:</strong> Jab aapko ek detailed explanation ya note store karna ho.</p>
+  
+      <div class="section-title">3. Integer Field</div>
+      <p><strong>Description:</strong> Ye field sirf integer values ko store karta hai, jaise quantity ya count.</p>
+      <p><strong>Example:</strong> age, quantity, total_items.</p>
+      <pre><code class="language-python">quantity = fields.Integer(string="Quantity")</code></pre>
+      <p><strong>Usage:</strong> Ye field sirf poore numbers ko handle karta hai, aur decimal values nahi rakh sakta.</p>
+  
+      <div class="section-title">4. Float Field</div>
+      <p><strong>Description:</strong> Ye field decimal numbers (floating point numbers) ko store karta hai, jaise prices, weights, etc.</p>
+      <p><strong>Example:</strong> price, weight, rating.</p>
+      <pre><code class="language-python">price = fields.Float(string="Price")</code></pre>
+      <p><strong>Usage:</strong> Jab aapko aise numbers chahiye jo decimal values ke saath ho, jaise financial figures ya weight.</p>
+  
+      <div class="section-title">5. Boolean Field</div>
+      <p><strong>Description:</strong> Ye field True/False ya Yes/No type of values ko store karta hai.</p>
+      <p><strong>Example:</strong> is_active, is_approved.</p>
+      <pre><code class="language-python">is_active = fields.Boolean(string="Is Active?")</code></pre>
+      <p><strong>Usage:</strong> Ye field ek check-box ki tarah kaam karta hai, jisme user ko yes/no ya true/false ka option diya jata hai.</p>
+  
+      <div class="section-title">6. Date Field</div>
+      <p><strong>Description:</strong> Ye field kisi specific date ko store karta hai, jaise birthdays, meeting dates, etc.</p>
+      <p><strong>Example:</strong> start_date, end_date, birth_date.</p>
+      <pre><code class="language-python">start_date = fields.Date(string="Start Date")</code></pre>
+      <p><strong>Usage:</strong> Jab aapko sirf date store karni ho, time nahi.</p>
+  
+      <div class="section-title">7. Datetime Field</div>
+      <p><strong>Description:</strong> Ye field date ke saath time bhi store karta hai, jaise event start time ya meeting date & time.</p>
+      <p><strong>Example:</strong> appointment_datetime, event_start.</p>
+      <pre><code class="language-python">event_start = fields.Datetime(string="Event Start")</code></pre>
+      <p><strong>Usage:</strong> Jab aapko date ke saath exact time bhi store karna ho.</p>
+  
+      <div class="section-title">8. Selection Field</div>
+      <p><strong>Description:</strong> Ye field ek dropdown menu ya list of options provide karta hai. Aap specific options ko pre-define kar sakte hain, aur user ko unme se choose karne ka option milta hai.</p>
+      <p><strong>Example:</strong> status field with options like "Draft", "Sent", "Confirmed".</p>
+      <pre><code class="language-python">status = fields.Selection([
+          ('draft', 'Draft'),
+          ('sent', 'Sent'),
+          ('confirmed', 'Confirmed')
+      ], string="Status")</code></pre>
+      <p><strong>Usage:</strong> Jab aapko predefined options dikhana ho aur user ko usme se choose karne ka option dena ho.</p>
+  
+      <div class="section-title">9. Many2one Field</div>
+      <p><strong>Description:</strong> Ye field ek relationship create karta hai jisme ek record dusre record se linked hota hai. Jaise ek sale order ka customer.</p>
+      <p><strong>Example:</strong> customer_id, partner_id.</p>
+      <pre><code class="language-python">customer_id = fields.Many2one('res.partner', string="Customer")</code></pre>
+      <p><strong>Usage:</strong> Jab aapko ek record ke saath dusre record ko link karna ho (like linking a sale order with a customer).</p>
+  
+      <div class="section-title">10. One2many Field</div>
+      <p><strong>Description:</strong> Ye field ek record ke saath multiple records ko link karta hai. Jaise ek customer ke multiple orders ho sakte hain.</p>
+      <p><strong>Example:</strong> order_lines, sales_orders.</p>
+      <pre><code class="language-python">order_lines = fields.One2many('sale.order.line', 'order_id', string="Order Lines")</code></pre>
+      <p><strong>Usage:</strong> Jab ek record ka multiple records ke saath relation ho, jese ek order ke multiple line items.</p>
+  
+      <div class="section-title">11. Many2many Field</div>
+      <p><strong>Description:</strong> Ye field ek a... (Content continues)</p>
+    </div>
+  </body>
+  
 
 
 
