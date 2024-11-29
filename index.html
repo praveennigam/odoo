@@ -615,8 +615,8 @@ def list_partners(self):
 
 
 
-    <div class="content">
-        <h1>Odoo Fields - Deep Explanation in Your Style</h1>
+    <div class="content" style="margin-bottom:20px;">
+        <h1>Odoo Fields - Deep Explanation </h1>
 
         <div class="section-title">1. Char Field</div>
       <p><strong>Description:</strong> Ye field text data store karta hai, jaise names, titles, short descriptions, etc.</p>
@@ -881,143 +881,142 @@ static/
 
 
 
-
 <div class="content" style="margin-bottom:20px;">
-  <h1 > A. Wizard in Odoo – Deep Explanation</h1>
-  <p>
-    Wizard ek <span class="highlight">popup form</span> hota hai jo user se kuch inputs leta hai aur un inputs ke basis par kuch actions perform karta hai. 
-    Wizard ka data <span class="important">TransientModel</span> me store hota hai, jo session ke baad automatically delete ho jata hai.
-  </p>
-
-  <h2 class="section-title">Wizard ke Features</h2>
-  <ul>
-    <li>
-      <strong class="important">Temporary Data Handle karta hai:</strong> Wizard ka data database me permanently save nahi hota.
-      <br />
-      <code>TransientModel</code> unused records ko 30 minutes ke baad automatically delete kar deta hai.
-    </li>
-    <li>
-      <strong>Popup Form View Dikhata hai:</strong> Wizard ek popup ke roop me dikhai deta hai (<code>target="new"</code>).
-      Ye ek specific task ko user-friendly tarike se complete karne ke liye use hota hai.
-    </li>
-    <li>
-      <strong>Input Collection aur Actions Perform karta hai:</strong> User se inputs collect karne ke baad wizard un inputs ke basis par kuch backend actions perform karta hai, jaise reports generate karna, multiple records update karna, ya filters apply karna.
-    </li>
-  </ul>
-
-  <h2 class="subsection-title">Use Case: Sale Order Status Update</h2>
-  <p>
-    Is wizard ka use multiple sale orders ka status ek saath update karne ke liye kiya jayega.
-  </p>
-
-  <h3 class="section-title">Step 1: Model Define karta hai</h3>
-  <p>
-    Wizard ka model hamesha <code>TransientModel</code> se inherit karta hai aur isme temporary fields define kiye jate hain jo user ke inputs handle karte hain.
-  </p>
-
-  <pre>
-<code class="language-python">
-from odoo import models, fields, api
-
-class UpdateSaleOrderWizard(models.TransientModel):
-    _name = 'update.sale.order.wizard'
-    _description = 'Wizard to Update Sale Order Status'
-
-    sale_order_ids = fields.Many2many(
-        'sale.order',
-        string="Sale Orders",
-        help="Un sale orders ko select karein jinhe update karna hai."
-    )
-
-    new_status = fields.Selection(
-        [
-            ('draft', 'Draft'),
-            ('sent', 'Quotation Sent'),
-            ('sale', 'Sale Order')
-        ],
-        string="New Status",
-        required=True,
-        help="Naya status select karein jo sale orders ko assign karna hai."
-    )
-
-    def update_status(self):
-        """
-        Sale orders ka status update karne ke liye ye function use hota hai.
-        """
-        for order in self.sale_order_ids:
-            order.state = self.new_status
-</code>
-  </pre>
-
-  <h3 class="section-title">Step 2: View Create karta hai</h3>
-  <p>
-    Wizard ka view ek form view hota hai jo popup me user inputs display karta hai. Isme buttons hote hain jo "Update" aur "Cancel" actions ko perform karte hain.
-  </p>
-
-  <pre>
-<code class="language-xml">
-&lt;odoo&gt;
-    &lt;record id="view_update_sale_order_wizard" model="ir.ui.view"&gt;
-        &lt;field name="name"&gt;Update Sale Order Wizard Form&lt;/field&gt;
-        &lt;field name="model"&gt;update.sale.order.wizard&lt;/field&gt;
-        &lt;field name="arch" type="xml"&gt;
-            &lt;form string="Update Sale Orders"&gt;
-                &lt;group&gt;
-                    &lt;field name="sale_order_ids" widget="many2many_tags"/&gt;
-                    &lt;field name="new_status"/&gt;
-                &lt;/group&gt;
-                &lt;footer&gt;
-                    &lt;button string="Update Status" type="object" name="update_status" class="btn-primary"/&gt;
-                    &lt;button string="Cancel" class="btn-secondary" special="cancel"/&gt;
-                &lt;/footer&gt;
-            &lt;/form&gt;
-        &lt;/field&gt;
-    &lt;/record&gt;
-&lt;/odoo&gt;
-</code>
-  </pre>
-
-  <h3 class="section-title">Step 3: Action Define karta hai</h3>
-  <pre>
-<code class="language-xml">
-&lt;odoo&gt;
-    &lt;record id="action_update_sale_order_wizard" model="ir.actions.act_window"&gt;
-        &lt;field name="name"&gt;Update Sale Orders&lt;/field&gt;
-        &lt;field name="res_model"&gt;update.sale.order.wizard&lt;/field&gt;
-        &lt;field name="view_mode"&gt;form&lt;/field&gt;
-        &lt;field name="target"&gt;new&lt;/field&gt;
-    &lt;/record&gt;
-&lt;/odoo&gt;
-</code>
-  </pre>
-
-  <h3 class="section-title">Step 4: Button Add karta hai</h3>
-  <pre>
-<code class="language-xml">
-&lt;odoo&gt;
-    &lt;record id="sale_order_tree_button" model="ir.ui.view"&gt;
-        &lt;field name="name"&gt;Sale Order Tree Button&lt;/field&gt;
-        &lt;field name="model"&gt;sale.order&lt;/field&gt;
-        &lt;field name="inherit_id" ref="sale.view_order_tree"/&gt;
-        &lt;field name="arch" type="xml"&gt;
-            &lt;header&gt;
-                &lt;button name="%(action_update_sale_order_wizard)d" string="Update Status" type="action" class="btn-primary"/&gt;
-            &lt;/header&gt;
-        &lt;/field&gt;
-    &lt;/record&gt;
-&lt;/odoo&gt;
-</code>
-  </pre>
-
-  <h2 class="section-title">Summary</h2>
-  <ul>
-    <li><strong>Model:</strong> Defines temporary fields for user inputs.</li>
-    <li><strong>View:</strong> Displays a form with inputs in a popup.</li>
-    <li><strong>Action:</strong> Triggers the wizard popup.</li>
-    <li><strong>Button:</strong> Links the wizard to a specific module or view.</li>
-  </ul>
-</div>
-
+    <h1> A. Wizard in Odoo – Deep Explanation</h1>
+    <p>
+      Wizard ek <span class="highlight">popup form</span> hota hai jo user se kuch inputs leta hai aur un inputs ke basis par kuch actions perform karta hai. 
+      Wizard ka data <span class="important">TransientModel</span> me store hota hai, jo session ke baad automatically delete ho jata hai.
+    </p>
+  
+    <h2 class="section-title">Wizard ke Features</h2>
+    <ul>
+      <li>
+        <strong class="important">Temporary Data Handle karta hai:</strong> Wizard ka data database me permanently save nahi hota.
+        <br />
+        <code>TransientModel</code> unused records ko 30 minutes ke baad automatically delete kar deta hai.
+      </li>
+      <li>
+        <strong>Popup Form View Dikhata hai:</strong> Wizard ek popup ke roop me dikhai deta hai (<code>target="new"</code>).
+        Ye ek specific task ko user-friendly tarike se complete karne ke liye use hota hai.
+      </li>
+      <li>
+        <strong>Input Collection aur Actions Perform karta hai:</strong> User se inputs collect karne ke baad wizard un inputs ke basis par kuch backend actions perform karta hai, jaise reports generate karna, multiple records update karna, ya filters apply karna.
+      </li>
+    </ul>
+  
+    <h2 class="subsection-title">Use Case: Sale Order Status Update</h2>
+    <p>
+      Is wizard ka use multiple sale orders ka status ek saath update karne ke liye kiya jayega.
+    </p>
+  
+    <h3 class="section-title">Step 1: Model Define karta hai</h3>
+    <p>
+      Wizard ka model hamesha <code>TransientModel</code> se inherit karta hai aur isme temporary fields define kiye jate hain jo user ke inputs handle karte hain.
+    </p>
+  
+    <pre>
+  <code class="language-python">
+  from odoo import models, fields, api
+  
+  class UpdateSaleOrderWizard(models.TransientModel):
+      _name = 'update.sale.order.wizard'  &lt; !-- Yaha pe wizard ka model define kiya gaya hai -- &gt; 
+      _description = 'Wizard to Update Sale Order Status'  &lt; !-- Ye description hai wizard ka -- &gt; 
+  
+      sale_order_ids = fields.Many2many(
+          'sale.order',  &lt; !-- Sale orders ko select karne ke liye Many2many field use kiya gaya -- &gt; 
+          string="Sale Orders",  &lt; !-- Field ka label -- &gt; 
+          help="Un sale orders ko select karein jinhe update karna hai."  &lt; !-- User ko field ka purpose samjhane ke liye help text -- &gt; 
+      )
+  
+      new_status = fields.Selection(
+          [
+              ('draft', 'Draft'),
+              ('sent', 'Quotation Sent'),
+              ('sale', 'Sale Order')  &lt; !-- Status options jo user choose kar sakta hai -- &gt; 
+          ],
+          string="New Status",  &lt; !-- Field ka label -- &gt; 
+          required=True,  &lt; !-- Field ko required bana diya gaya hai -- &gt; 
+          help="Naya status select karein jo sale orders ko assign karna hai."  &lt; !-- User ko field ka purpose samjhane ke liye help text -- &gt; 
+      )
+  
+      def update_status(self):
+          """
+          Sale orders ka status update karne ke liye ye function use hota hai.
+          """
+          for order in self.sale_order_ids:
+              order.state = self.new_status  &lt; !-- Loop chalake selected orders ka status update kiya gaya -- &gt; 
+  </code>
+    </pre>
+  
+    <h3 class="section-title">Step 2: View Create karta hai</h3>
+    <p>
+      Wizard ka view ek form view hota hai jo popup me user inputs display karta hai. Isme buttons hote hain jo "Update" aur "Cancel" actions ko perform karte hain.
+    </p>
+  
+    <pre>
+  <code class="language-xml">
+  &lt;odoo&gt;
+      &lt;record id="view_update_sale_order_wizard" model="ir.ui.view"&gt;
+          &lt;field name="name"&gt;Update Sale Order Wizard Form&lt;/field&gt;
+          &lt;field name="model"&gt;update.sale.order.wizard&lt;/field&gt;
+          &lt;field name="arch" type="xml"&gt;
+              &lt;form string="Update Sale Orders"&gt;  &lt; !-- Form view define kiya gaya hai -- &gt; 
+                  &lt;group&gt;
+                      &lt;field name="sale_order_ids" widget="many2many_tags"/&gt;  &lt; !-- Many2many field ko tags widget ke saath display kiya gaya -- &gt; 
+                      &lt;field name="new_status"/&gt;  &lt; !-- New status field -- &gt; 
+                  &lt;/group&gt;
+                  &lt;footer&gt;
+                      &lt;button string="Update Status" type="object" name="update_status" class="btn-primary"/&gt;  &lt; !-- Update button ko object type diya gaya hai jo function call karega -- &gt; 
+                      &lt;button string="Cancel" class="btn-secondary" special="cancel"/&gt;  &lt; !-- Cancel button -- &gt; 
+                  &lt;/footer&gt;
+              &lt;/form&gt;
+          &lt;/field&gt;
+      &lt;/record&gt;
+  &lt;/odoo&gt;
+  </code>
+    </pre>
+  
+    <h3 class="section-title">Step 3: Action Define karta hai</h3>
+    <pre>
+  <code class="language-xml">
+  &lt;odoo&gt;
+      &lt;record id="action_update_sale_order_wizard" model="ir.actions.act_window"&gt;
+          &lt;field name="name"&gt;Update Sale Orders&lt;/field&gt;
+          &lt;field name="res_model"&gt;update.sale.order.wizard&lt;/field&gt;  &lt; !-- Action define karte waqt wizard ka model specify kiya gaya -- &gt; 
+          &lt;field name="view_mode"&gt;form&lt;/field&gt;  &lt; !-- View mode form set kiya gaya -- &gt; 
+          &lt;field name="target"&gt;new&lt;/field&gt;  &lt; !-- Target 'new' specify karte hai taaki popup view dikhe -- &gt; 
+      &lt;/record&gt;
+  &lt;/odoo&gt;
+  </code>
+    </pre>
+  
+    <h3 class="section-title">Step 4: Button Add karta hai</h3>
+    <pre>
+  <code class="language-xml">
+  &lt;odoo&gt;
+      &lt;record id="sale_order_tree_button" model="ir.ui.view"&gt;
+          &lt;field name="name"&gt;Sale Order Tree Button&lt;/field&gt;
+          &lt;field name="model"&gt;sale.order&lt;/field&gt;
+          &lt;field name="inherit_id" ref="sale.view_order_tree"/&gt;  &lt; !-- Sale order view ko inherit kiya gaya -- &gt; 
+          &lt;field name="arch" type="xml"&gt;
+              &lt;header&gt;
+                  &lt;button name="%(action_update_sale_order_wizard)d" string="Update Status" type="action" class="btn-primary"/&gt;  &lt; !-- Button add kiya gaya jo action ko call karega -- &gt; 
+              &lt;/header&gt;
+          &lt;/field&gt;
+      &lt;/record&gt;
+  &lt;/odoo&gt;
+  </code>
+    </pre>
+  
+    <h2 class="section-title">Summary</h2>
+    <ul>
+      <li><strong>Model:</strong> Defines temporary fields for user inputs.</li>
+      <li><strong>View:</strong> Displays a form with inputs in a popup.</li>
+      <li><strong>Action:</strong> Triggers the wizard popup.</li>
+      <li><strong>Button:</strong> Links the wizard to a specific module or view.</li>
+    </ul>
+  </div>
+  
 
 
 
